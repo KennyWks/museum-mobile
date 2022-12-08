@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {GetStarted, Splash, Scanner, ShowData} from '../pages';
+import {GetStarted, Splash, Scanner, ShowData, Register} from '../pages';
 
 const Stack = createStackNavigator();
 
@@ -23,10 +23,7 @@ export default function Router() {
         component={ShowData}
         options={{headerShown: false}}
       />
-      {/* <Stack.Screen
-        name="Register"
-        component={Register}
-      /> */}
+      <Stack.Screen name="Register" component={Register} />
     </Stack.Navigator>
   );
 }

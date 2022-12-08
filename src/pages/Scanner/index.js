@@ -1,12 +1,20 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {ILLogo} from '../../assets';
+import {Button} from '../../components';
 
 export default function Scanner({navigation}) {
   return (
     <View style={styles.page}>
       <ILLogo />
-      <Text style={styles.title}>Scanner PAge</Text>
+      <Text style={styles.title}>Scanner Page</Text>
+      <Button
+        onPress={() => {
+          navigation.replace('ShowData');
+        }}
+        title="Scan"
+        type="darkk"
+      />
     </View>
   );
 }

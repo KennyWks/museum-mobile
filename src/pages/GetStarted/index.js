@@ -1,7 +1,7 @@
 import React from 'react';
 import {ImageBackground, StyleSheet, Text, View} from 'react-native';
 import {ILGetStarted, ILLogo} from '../../assets';
-import {Button} from '../../components';
+import {Button, Gap} from '../../components';
 
 export default function GetStarted({navigation}) {
   return (
@@ -15,17 +15,18 @@ export default function GetStarted({navigation}) {
       <View>
         <Button
           onPress={() => {
-            navigation.navigate('ShowData');
+            navigation.navigate('Scanner');
           }}
-          title="Scan Code"
+          title="Scanner"
           type="dark"
         />
+        <Gap height={10} />
         <Button
           onPress={() => {
             navigation.navigate('Register');
           }}
-          title="Daftar"
-          type="dark"
+          title="Register"
+          type="darkk"
         />
       </View>
     </ImageBackground>
