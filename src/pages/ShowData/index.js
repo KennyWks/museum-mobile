@@ -20,7 +20,6 @@ export default function ShowData({navigation, route}) {
     try {
       const result = await getData(`/api/getDataKoleksi/${koleksi_id}`);
       setKoleksi(result.data.data[0]);
-      console.log(result.data.data[0]);
     } catch (error) {
       console.log(error);
     }
