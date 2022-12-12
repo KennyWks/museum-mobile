@@ -1,10 +1,9 @@
 import axios from 'axios';
-export const ApiURL = 'http://localhost:8000/api/kunjungan';
+export const ApiURL = 'http://192.168.1.19:8000';
 
 const header = {
   'Content-Type': 'multipart/form-data',
 };
-let token = {};
 
 export const postData = async (path, data) => {
   try {
@@ -17,7 +16,7 @@ export const postData = async (path, data) => {
 
 export const getData = async path => {
   try {
-    const response = await axios.get(ApiURL + path, token);
+    const response = await axios.get(ApiURL + path);
     return response;
   } catch (error) {
     throw error;

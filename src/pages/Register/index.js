@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
+import {showMessage} from 'react-native-flash-message';
 import {ScrollView} from 'react-native-gesture-handler';
-import {Button, Gap, Header, Input, Loading} from '../../components';
-import {useForm} from '../../utils';
+import {Button, Dropdown, Gap, Header, Input, Loading} from '../../components';
 import {postData} from '../../helpers/CRUD';
-import {showMessage, hideMessage} from 'react-native-flash-message';
+import {useForm} from '../../utils';
 
 export default function Register() {
   const [form, setForm] = useForm({
@@ -19,20 +19,56 @@ export default function Register() {
   const onSave = async () => {
     setLoading(true);
     try {
-      const result = await postData('/kunjungan', form);
-      setForm('reset');
-      showMessage({
-        message: 'Berhasil',
-        type: 'success',
-      });
+      const result = await postData('/api/kunjungan', form);
+      const {message, success} = result.data;
+      if (success) {
+        setForm('reset');
+        showMessage({
+          message: message,
+          type: 'success',
+        });
+      }
     } catch (error) {
-      console.log(error);
+      const data = error.response.data.errors;
+      handleEachMessage(data);
+    }
+    setLoading(false);
+  };
+
+  const handleEachMessage = data => {
+    if (data.nama_pengunjung) {
       showMessage({
-        message: 'Gagal',
+        message: data.nama_pengunjung[0],
         type: 'danger',
       });
     }
-    setLoading(false);
+
+    setTimeout(() => {
+      if (data.jk) {
+        showMessage({
+          message: data.jk[0],
+          type: 'danger',
+        });
+      }
+    }, 3000);
+
+    setTimeout(() => {
+      if (data.alamat) {
+        showMessage({
+          message: data.alamat[0],
+          type: 'danger',
+        });
+      }
+    }, 6000);
+
+    setTimeout(() => {
+      if (data.no_hp) {
+        showMessage({
+          message: data.no_hp[0],
+          type: 'danger',
+        });
+      }
+    }, 9000);
   };
 
   return (
@@ -45,10 +81,14 @@ export default function Register() {
             value={form.nama_pengunjung}
             onChangeText={value => setForm('nama_pengunjung', value)}
           />
-          <Input
+          <Gap height={5} />
+          <Dropdown
             label="Jenis Kelamin"
-            value={form.jk}
-            onChangeText={value => setForm('jk', value)}
+            items={[
+              {label: 'Laki-laki', value: 'laki-laki'},
+              {label: 'Perempuan', value: 'perempuan'},
+            ]}
+            onValueChange={value => setForm('jk', value)}
           />
           <Input
             label="Alamat"
