@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import {CameraScreen} from 'react-native-camera-kit';
 
-const Scanner = ({navigation, route}) => {
+export default function ScannerScreen({navigation, route}) {
   const [qrvalue, setQrvalue] = useState('');
   const [opneScanner, setOpneScanner] = useState(false);
 
@@ -27,7 +27,10 @@ const Scanner = ({navigation, route}) => {
   const onBarcodeScan = qrvalue => {
     // Called after te successful scanning of QRCode/Barcode
     setQrvalue(qrvalue);
-    navigation.replace('ShowData', {koleksi_id: qrvalue});
+    navigation.navigate('ShowDataScreen', {
+      screen: 'ScannerScreen',
+      koleksi_id: qrvalue,
+    });
     // setOpneScanner(false);
   };
 
@@ -74,7 +77,7 @@ const Scanner = ({navigation, route}) => {
             // Can restrict for the QR Code only
             laserColor={'blue'}
             // Color can be of your choice
-            frameColor={'yellow'}
+            frameColor={'#F5C7A9'}
             // If frame is visible then frame color
             colorForScannerFrame={'black'}
             // Scanner Frame color
@@ -104,9 +107,7 @@ const Scanner = ({navigation, route}) => {
       )}
     </SafeAreaView>
   );
-};
-
-export default Scanner;
+}
 
 const styles = StyleSheet.create({
   container: {

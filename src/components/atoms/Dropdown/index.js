@@ -7,7 +7,7 @@ export default function Dropdown({label, items, onValueChange}) {
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
       <RNPickerSelect
-        placeholder={{label: `Pilih ${label}`, value: null}}
+        placeholder={{label: `Choose ${label}`, value: null}}
         onValueChange={onValueChange}
         items={items}
         style={pickerSelectStyles}
@@ -17,13 +17,12 @@ export default function Dropdown({label, items, onValueChange}) {
 }
 
 const styles = StyleSheet.create({
-  label: {color: 'black', fontSize: 16},
+  label: {color: '#F5E8E4', fontSize: 16},
   container: {
     borderWidth: 1,
     borderRadius: 10,
-    borderColor: 'blue',
+    borderColor: '#F5E8E4',
     padding: 12,
-    color: 'black',
   },
 });
 
@@ -34,7 +33,7 @@ const pickerSelectStyles = StyleSheet.create({
     paddingHorizontal: 12,
     borderWidth: 1,
     borderRadius: 4,
-    color: 'black',
+    color: '#F5E8E4',
     paddingRight: 30, // to ensure the text is never behind the icon
   },
   inputAndroid: {
@@ -43,7 +42,7 @@ const pickerSelectStyles = StyleSheet.create({
     paddingVertical: 12,
     borderWidth: 0.5,
     borderRadius: 8,
-    color: 'black',
+    color: '#F5E8E4',
     paddingRight: 30, // to ensure the text is never behind the icon
   },
 });

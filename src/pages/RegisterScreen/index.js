@@ -6,7 +6,7 @@ import {Button, Dropdown, Gap, Header, Input, Loading} from '../../components';
 import {postData} from '../../helpers/CRUD';
 import {useForm} from '../../utils';
 
-export default function Register() {
+export default function RegisterScreen() {
   const [form, setForm] = useForm({
     nama_pengunjung: '',
     jk: '',
@@ -15,6 +15,15 @@ export default function Register() {
   });
 
   const [loading, setLoading] = useState(false);
+  const jobs = [
+    {label: 'Not Working', value: 'Not Working'},
+    {label: 'Taking care of households', value: 'Taking care of households'},
+    {label: 'Students', value: 'Students'},
+    {label: 'Teacher', value: 'Teacher'},
+    {label: 'Civil Servant', value: 'Civil Servant'},
+    {label: 'Army', value: 'Army'},
+    {label: 'Police Officer', value: 'Police Officer'},
+  ];
 
   const onSave = async () => {
     setLoading(true);
@@ -75,33 +84,37 @@ export default function Register() {
     <>
       <View style={styles.page}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <Header />
           <Input
-            label="Nama"
+            label="Name"
             value={form.nama_pengunjung}
             onChangeText={value => setForm('nama_pengunjung', value)}
           />
           <Gap height={5} />
           <Dropdown
-            label="Jenis Kelamin"
+            label="Gender"
             items={[
-              {label: 'Laki-laki', value: 'laki-laki'},
-              {label: 'Perempuan', value: 'perempuan'},
+              {label: 'Male', value: 'Male'},
+              {label: 'Female', value: 'Female'},
             ]}
             onValueChange={value => setForm('jk', value)}
           />
+          <Dropdown
+            label="Jobs"
+            items={jobs}
+            onValueChange={value => setForm('jk', value)}
+          />
           <Input
-            label="Alamat"
+            label="Address"
             value={form.alamat}
             onChangeText={value => setForm('alamat', value)}
           />
           <Input
-            label="Nomor HP"
+            label="Phone Number"
             value={form.no_hp}
             onChangeText={value => setForm('no_hp', value)}
           />
           <Gap height={10} />
-          <Button onPress={onSave} title="Save" type="darkk" />
+          <Button onPress={onSave} title="Save" type="dark" />
         </ScrollView>
       </View>
       {loading && <Loading />}
@@ -112,6 +125,7 @@ export default function Register() {
 const styles = StyleSheet.create({
   page: {
     flex: 1,
-    padding: 25,
+    padding: 20,
+    backgroundColor: '#030303',
   },
 });

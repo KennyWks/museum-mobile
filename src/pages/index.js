@@ -1,7 +1,15 @@
 import Splash from './Splash';
 import GetStarted from './GetStarted';
-import Scanner from './Scanner';
-import ShowData from './ShowData';
-import Register from './Register';
+import ShowDataScreen from './ShowDataScreen';
+import ScannerScreen from './ScannerScreen';
+import RegisterScreen from './RegisterScreen';
+import SaranScreen from './SaranScreen';
 
-export {Splash, GetStarted, Scanner, ShowData, Register};
+export {
+  Splash,
+  GetStarted,
+  ShowDataScreen,
+  ScannerScreen,
+  RegisterScreen,
+  SaranScreen,
+};

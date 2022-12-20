@@ -13,12 +13,10 @@ export default DataRelic;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: 'black',
+    padding: 12,
     marginLeft: 5,
     marginRight: 5,
   },
-  label: {fontSize: 14, marginBottom: 8, color: 'black', fontWeight: '700'},
-  value: {fontSize: 14, color: 'black'},
+  label: {fontSize: 14, marginBottom: 5, color: '#F5E8E4', fontWeight: '700'},
+  value: {fontSize: 14, color: '#F5E8E4', textAlign: 'justify'},
 });
