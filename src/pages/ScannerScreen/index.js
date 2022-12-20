@@ -16,7 +16,10 @@ export default function ScannerScreen({navigation, route}) {
   const [opneScanner, setOpneScanner] = useState(false);
 
   useEffect(() => {
-    onOpneScanner();
+    const unsubscribe = navigation.addListener('focus', () => {
+      onOpneScanner();
+    });
+    return unsubscribe;
   }, []);
 
   const onOpenlink = () => {
@@ -36,6 +39,8 @@ export default function ScannerScreen({navigation, route}) {
 
   const onOpneScanner = () => {
     // To Start Scanning
+    setQrvalue('');
+    setOpneScanner(false);
     if (Platform.OS === 'android') {
       async function requestCameraPermission() {
         try {
@@ -48,7 +53,6 @@ export default function ScannerScreen({navigation, route}) {
           );
           if (granted === PermissionsAndroid.RESULTS.GRANTED) {
             // If CAMERA Permission is granted
-            setQrvalue('');
             setOpneScanner(true);
           } else {
             alert('CAMERA permission denied');
@@ -61,7 +65,6 @@ export default function ScannerScreen({navigation, route}) {
       // Calling the camera permission function
       requestCameraPermission();
     } else {
-      setQrvalue('');
       setOpneScanner(true);
     }
   };

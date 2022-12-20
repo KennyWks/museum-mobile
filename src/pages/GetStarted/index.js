@@ -100,7 +100,7 @@ export default function GetStarted({navigation}) {
 
           {/* Start Berita section */}
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>Article</Text>
+            <Text style={styles.title}>Articles</Text>
           </View>
           <View style={styles.listCardDua(tabBarHeight)}>
             <ScrollView showsVerticalScrollIndicator={false}>

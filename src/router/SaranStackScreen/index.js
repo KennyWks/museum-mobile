@@ -10,7 +10,7 @@ export default function SaranStackScreen() {
       <Stack.Screen
         name="SaranScreen"
         component={SaranScreen}
-        options={{title: 'Saran'}}
+        options={{title: 'Recommendations'}}
       />
     </Stack.Navigator>
   );

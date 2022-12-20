@@ -2,11 +2,20 @@ import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
 import {ScrollView} from 'react-native-gesture-handler';
-import {Button, Dropdown, Gap, Header, Input, Loading} from '../../components';
+import {
+  Button,
+  Dropdown,
+  Gap,
+  Input,
+  Loading,
+  Textarea,
+} from '../../components';
 import {postData} from '../../helpers/CRUD';
 import {useForm} from '../../utils';
+import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 export default function RegisterScreen() {
+  const tabBarHeight = useBottomTabBarHeight();
   const [form, setForm] = useForm({
     nama_pengunjung: '',
     jk: '',
@@ -81,8 +90,8 @@ export default function RegisterScreen() {
   };
 
   return (
-    <>
-      <View style={styles.page}>
+    <View style={{backgroundColor: '#030303', flex: 1}}>
+      <View style={styles.page(tabBarHeight)}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Input
             label="Name"
@@ -101,10 +110,11 @@ export default function RegisterScreen() {
           <Dropdown
             label="Jobs"
             items={jobs}
-            onValueChange={value => setForm('jk', value)}
+            onValueChange={value => setForm('pekerjaan', value)}
           />
-          <Input
+          <Textarea
             label="Address"
+            numberOfLines={5}
             value={form.alamat}
             onChangeText={value => setForm('alamat', value)}
           />
@@ -118,14 +128,15 @@ export default function RegisterScreen() {
         </ScrollView>
       </View>
       {loading && <Loading />}
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  page: {
+  page: tabBarHeight => ({
     flex: 1,
     padding: 20,
     backgroundColor: '#030303',
-  },
+    marginBottom: tabBarHeight + 15,
+  }),
 });

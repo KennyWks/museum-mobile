@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {DataRelic, Loading} from '../../components';
-import {getData, ApiURL} from '../../helpers/CRUD';
+import {getData} from '../../helpers/CRUD';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {ImageSlider} from 'react-native-image-slider-banner';
 
@@ -38,6 +38,7 @@ export default function ShowDataScreen({navigation, route}) {
             autoPlay={true}
             timer={3000}
             closeIconColor="#fff"
+            key={koleksi.koleksi_id}
           />
           <View style={styles.textContent(tabBarHeight)}>
             <View style={styles.titleContainer}>
