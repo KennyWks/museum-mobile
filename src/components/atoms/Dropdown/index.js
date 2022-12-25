@@ -2,14 +2,14 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 
-export default function Dropdown({label, items, onValueChange}) {
+export default function Dropdown({label, data, onValueChange}) {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
       <RNPickerSelect
-        placeholder={{label: `Choose ${label}`, value: null}}
+        placeholder={{label: `Select ${label}`, value: null}}
         onValueChange={onValueChange}
-        items={items}
+        items={data}
         style={pickerSelectStyles}
       />
     </View>

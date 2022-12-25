@@ -9,6 +9,7 @@ import {
   Input,
   Loading,
   Textarea,
+  DropdownComponent,
 } from '../../components';
 import {postData} from '../../helpers/CRUD';
 import {useForm} from '../../utils';
@@ -16,14 +17,19 @@ import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 export default function RegisterScreen() {
   const tabBarHeight = useBottomTabBarHeight();
+
+  const [students, setStudents] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useForm({
     nama_pengunjung: '',
     jk: '',
+    asal_negara: '',
+    kab_kota: '',
+    pekerjaan: '',
+    sekolah: '',
     alamat: '',
     no_hp: '',
   });
-
-  const [loading, setLoading] = useState(false);
   const jobs = [
     {label: 'Not Working', value: 'Not Working'},
     {label: 'Taking care of households', value: 'Taking care of households'},
@@ -101,16 +107,41 @@ export default function RegisterScreen() {
           <Gap height={5} />
           <Dropdown
             label="Gender"
-            items={[
+            data={[
               {label: 'Male', value: 'Male'},
               {label: 'Female', value: 'Female'},
             ]}
             onValueChange={value => setForm('jk', value)}
           />
-          <Dropdown
-            label="Jobs"
-            items={jobs}
-            onValueChange={value => setForm('pekerjaan', value)}
+          <Gap height={5} />
+          <DropdownComponent
+            label={'Countries'}
+            data={[
+              {label: 'Indonesia', value: 'Indonesia'},
+              {label: 'Malaysia', value: 'Malaysia'},
+              {label: 'Singapura', value: 'Singapura'},
+            ]}
+            onValueChange={value => setForm('asal_negara', value)}
+          />
+          <Gap height={5} />
+          <DropdownComponent
+            label="States/Provinces"
+            data={[
+              {label: 'NTT', value: 'NTT'},
+              {label: 'Maluku', value: 'Maluku'},
+              {label: 'Jakarta', value: 'Jakarta'},
+            ]}
+            onValueChange={value => setForm('kab_kota', value)}
+          />
+          <Gap height={5} />
+          <DropdownComponent
+            label="Cities/Regions"
+            data={[
+              {label: 'Kupang', value: 'Kupang'},
+              {label: 'Jakarta', value: 'Jakarta'},
+              {label: 'Surabaya', value: 'Surabaya'},
+            ]}
+            onValueChange={value => setForm('kab_kota', value)}
           />
           <Textarea
             label="Address"
@@ -118,6 +149,26 @@ export default function RegisterScreen() {
             value={form.alamat}
             onChangeText={value => setForm('alamat', value)}
           />
+          <Gap height={5} />
+          <DropdownComponent
+            label="Jobs"
+            data={jobs}
+            onValueChange={value => {
+              if (value === 'Students' || value === 'Pelajar/Mahasiswa') {
+                setStudents(true);
+              } else {
+                setStudents(false);
+              }
+              setForm('pekerjaan', value);
+            }}
+          />
+          {students && (
+            <Input
+              label="School/University"
+              value={form.alamat}
+              onChangeText={value => setForm('sekolah', value)}
+            />
+          )}
           <Input
             label="Phone Number"
             value={form.no_hp}
