@@ -109,7 +109,8 @@ export default function SaranScreen() {
 const styles = StyleSheet.create({
   page: tabBarHeight => ({
     flex: 1,
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 3,
     backgroundColor: '#030303',
     marginBottom: tabBarHeight + 15,
   }),

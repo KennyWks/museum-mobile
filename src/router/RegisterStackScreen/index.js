@@ -10,7 +10,13 @@ export default function RegisterStackScreen() {
       <Stack.Screen
         name="RegisterScreen"
         component={RegisterScreen}
-        options={{title: 'Form Register'}}
+        options={{
+          title: 'Form Register',
+          headerStyle: {
+            backgroundColor: '#030303',
+          },
+          headerTintColor: '#fff',
+        }}
       />
     </Stack.Navigator>
   );

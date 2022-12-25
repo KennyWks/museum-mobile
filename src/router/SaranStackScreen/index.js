@@ -10,7 +10,13 @@ export default function SaranStackScreen() {
       <Stack.Screen
         name="SaranScreen"
         component={SaranScreen}
-        options={{title: 'Recommendations'}}
+        options={{
+          title: 'Recommendations',
+          headerStyle: {
+            backgroundColor: '#030303',
+          },
+          headerTintColor: '#fff',
+        }}
       />
     </Stack.Navigator>
   );

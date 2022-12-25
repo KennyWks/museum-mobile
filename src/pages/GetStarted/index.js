@@ -6,11 +6,12 @@ import {
   TouchableHighlight,
   View,
   Linking,
+  RefreshControl,
+  ScrollView,
 } from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {getData, ApiURL} from '../../helpers/CRUD';
-import {Loading} from '../../components';
+import {IconNavigation, PopupMenu, Loading} from '../../components';
 import moment from 'moment';
 import 'moment/locale/id';
 
@@ -20,11 +21,15 @@ export default function GetStarted({navigation}) {
   const [articles, setArticles] = useState([]);
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [refreshingEvents, setRefreshingEvents] = React.useState(false);
+  const [refreshingArticles, setRefreshingArticles] = React.useState(false);
 
   useEffect(() => {
     // fetchRequest();
+    setLoading(true);
     getArticles();
     getEvents();
+    setLoading(false);
   }, []);
 
   // const fetchRequest = async () => {
@@ -37,7 +42,6 @@ export default function GetStarted({navigation}) {
   // };
 
   const getArticles = async () => {
-    setLoading(true);
     try {
       const resultArticles = await getData('/api/getArtikel');
       setArticles(resultArticles.data.data);
@@ -53,77 +57,128 @@ export default function GetStarted({navigation}) {
     } catch (error) {
       console.log(error);
     }
-    setLoading(false);
   };
+
+  const onRefreshEvents = React.useCallback(() => {
+    setRefreshingEvents(true);
+    getEvents();
+    setRefreshingEvents(false);
+  }, []);
+
+  const onRefreshArticles = React.useCallback(() => {
+    setRefreshingArticles(true);
+    getArticles();
+    setRefreshingArticles(false);
+  }, []);
 
   return (
     <>
       {!loading && (
-        <View style={styles.page}>
-          {/* Start Events Section */}
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>Events</Text>
+        <View style={styles.container}>
+          <View style={styles.iconMenu}>
+            <PopupMenu
+              options={[
+                {label: 'Indonesia', value: 'indonesia'},
+                {label: 'English', value: 'english'},
+              ]}
+              label={
+                <IconNavigation name="translate" size={25} color="white" />
+              }
+              onSelect={value => console.log('translate', value)}
+            />
+            <PopupMenu
+              options={[
+                {label: 'Server 1', value: '192.168.1.1'},
+                {label: 'Server 2', value: '192.168.1.3'},
+              ]}
+              label={
+                <IconNavigation name="dots-vertical" size={25} color="white" />
+              }
+              onSelect={value => console.log('server', value)}
+            />
           </View>
-          <View style={styles.listCardSatu}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-              {events.map((val, i) => (
-                <TouchableHighlight
-                  key={i}
-                  onPress={() => {
-                    Linking.openURL('https://www.google.com');
-                  }}>
-                  <View style={styles.cardItem}>
-                    <View style={styles.cardImage}>
-                      <Image
-                        style={styles.image}
-                        // source={{
-                        //   uri: val.urls.small,
-                        // }}
-                        source={{uri: ApiURL + val.gambar + '?' + new Date()}}
-                      />
+          <View style={styles.content}>
+            {/* Start Events Section */}
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>Events</Text>
+            </View>
+            <View style={styles.listCardSatu}>
+              <ScrollView
+                showsVerticalScrollIndicator={false}
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refreshingEvents}
+                    onRefresh={onRefreshEvents}
+                  />
+                }>
+                {events.map((val, i) => (
+                  <TouchableHighlight
+                    key={i}
+                    onPress={() => {
+                      Linking.openURL('https://www.google.com');
+                    }}>
+                    <View style={styles.cardItem}>
+                      <View style={styles.cardImage}>
+                        <Image
+                          style={styles.image}
+                          // source={{
+                          //   uri: val.urls.small,
+                          // }}
+                          source={{uri: ApiURL + val.gambar + '?' + new Date()}}
+                        />
+                      </View>
+                      <View style={styles.cardDetail}>
+                        <Text style={styles.titleShadow}>
+                          {moment(val.created_at)
+                            .locale('en')
+                            .format('MMMM DD, YYYY')}
+                        </Text>
+                        <Text style={styles.titleCard}>
+                          {val.nama_kegiatan}
+                        </Text>
+                        <Text style={styles.titleShadow}>{val.keterangan}</Text>
+                      </View>
                     </View>
-                    <View style={styles.cardDetail}>
-                      <Text style={styles.titleShadow}>
+                  </TouchableHighlight>
+                ))}
+              </ScrollView>
+            </View>
+            {/* End Events Section */}
+
+            {/* Start Berita section */}
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>Articles</Text>
+            </View>
+            <View style={styles.listCardDua(tabBarHeight)}>
+              <ScrollView
+                showsVerticalScrollIndicator={false}
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refreshingArticles}
+                    onRefresh={onRefreshArticles}
+                  />
+                }>
+                {articles.map((val, i) => (
+                  <TouchableHighlight
+                    key={i}
+                    onPress={() => {
+                      Linking.openURL('https://www.google.com');
+                    }}>
+                    <View style={styles.cardBerita}>
+                      <Text style={styles.newsTitle}>{val.judul}</Text>
+                      <Text style={styles.newsPublishTime}>
+                        Published at{' : '}
                         {moment(val.created_at)
                           .locale('en')
-                          .format('MMMM DD, YYYY')}
+                          .format('ddd, DD MMMM YYYY')}
                       </Text>
-                      <Text style={styles.titleCard}>{val.nama_kegiatan}</Text>
-                      <Text style={styles.titleShadow}>{val.keterangan}</Text>
                     </View>
-                  </View>
-                </TouchableHighlight>
-              ))}
-            </ScrollView>
+                  </TouchableHighlight>
+                ))}
+              </ScrollView>
+            </View>
+            {/* End Berita section */}
           </View>
-          {/* End Events Section */}
-
-          {/* Start Berita section */}
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>Articles</Text>
-          </View>
-          <View style={styles.listCardDua(tabBarHeight)}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-              {articles.map((val, i) => (
-                <TouchableHighlight
-                  key={i}
-                  onPress={() => {
-                    Linking.openURL('https://www.google.com');
-                  }}>
-                  <View style={styles.cardBerita}>
-                    <Text style={styles.newsTitle}>{val.judul}</Text>
-                    <Text style={styles.newsPublishTime}>
-                      Published at{' : '}
-                      {moment(val.created_at)
-                        .locale('en')
-                        .format('ddd, DD MMMM YYYY')}
-                    </Text>
-                  </View>
-                </TouchableHighlight>
-              ))}
-            </ScrollView>
-          </View>
-          {/* End Berita section */}
         </View>
       )}
       {loading && <Loading />}
@@ -132,15 +187,26 @@ export default function GetStarted({navigation}) {
 }
 
 const styles = StyleSheet.create({
-  page: {
+  container: {
     backgroundColor: '#030303',
     flex: 1,
   },
+  iconMenu: {
+    height: '5%',
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    margin: 5,
+    paddingHorizontal: 20,
+  },
+  content: {
+    height: '95%',
+    width: '100%',
+  },
   titleContainer: {
-    flex: 1,
     justifyContent: 'flex-start',
     marginLeft: 20,
-    paddingTop: 18,
   },
   title: {
     fontSize: 20,
