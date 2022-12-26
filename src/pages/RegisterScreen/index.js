@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -11,34 +11,91 @@ import {
   Textarea,
   DropdownComponent,
 } from '../../components';
-import {postData} from '../../helpers/CRUD';
+import {getData, postData} from '../../helpers/CRUD';
 import {useForm} from '../../utils';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 export default function RegisterScreen() {
-  const tabBarHeight = useBottomTabBarHeight();
+  useEffect(() => {
+    getCountries();
+    getGenderAndJobsOptionLanguage();
+  }, []);
 
+  const tabBarHeight = useBottomTabBarHeight();
+  const [countryCode, setCountryCode] = useState([]);
+  const [countries, setCountries] = useState([]);
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [jobs, setJobs] = useState([]);
+  const [gender, setGender] = useState([]);
   const [students, setStudents] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useForm({
     nama_pengunjung: '',
     jk: '',
     asal_negara: '',
+    propinsi: '',
     kab_kota: '',
     pekerjaan: '',
     sekolah: '',
     alamat: '',
     no_hp: '',
   });
-  const jobs = [
-    {label: 'Not Working', value: 'Not Working'},
-    {label: 'Taking care of households', value: 'Taking care of households'},
-    {label: 'Students', value: 'Students'},
-    {label: 'Teacher', value: 'Teacher'},
-    {label: 'Civil Servant', value: 'Civil Servant'},
-    {label: 'Army', value: 'Army'},
-    {label: 'Police Officer', value: 'Police Officer'},
-  ];
+
+  const getGenderAndJobsOptionLanguage = async () => {
+    let condition = 'indonesian';
+    if (condition === 'english') {
+      setGender([
+        {label: 'Male', value: 'Male'},
+        {label: 'Female', value: 'Female'},
+      ]);
+    } else {
+      setGender([
+        {label: 'Laki-laki', value: 'Laki-laki'},
+        {label: 'Perempuan', value: 'Perempuan'},
+      ]);
+    }
+    try {
+      const result = await getData(`/api/getPekerjaan/${condition}`);
+      setJobs(result.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getCountries = async () => {
+    setLoading(true);
+    try {
+      const result = await getData('/api/getCountries');
+      setCountries(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
+  };
+
+  const getStates = async value => {
+    setLoading(true);
+    try {
+      const result = await getData(`/api/getStates/${value}`);
+      setStates(result.data);
+      setCities([]);
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
+  };
+
+  const getCities = async value => {
+    setLoading(true);
+    try {
+      const result = await getData(`/api/getCities/${countryCode}/${value}`);
+      setCities(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
+  };
 
   const onSave = async () => {
     setLoading(true);
@@ -51,8 +108,12 @@ export default function RegisterScreen() {
           message: message,
           type: 'success',
         });
+        getCountries();
+        setStates([]);
+        setCities([]);
       }
     } catch (error) {
+      console.log(error);
       const data = error.response.data.errors;
       handleEachMessage(data);
     }
@@ -105,49 +166,43 @@ export default function RegisterScreen() {
             onChangeText={value => setForm('nama_pengunjung', value)}
           />
           <Gap height={5} />
-          <Dropdown
-            label="Gender"
-            data={[
-              {label: 'Male', value: 'Male'},
-              {label: 'Female', value: 'Female'},
-            ]}
-            onValueChange={value => setForm('jk', value)}
-          />
-          <Gap height={5} />
           <DropdownComponent
             label={'Countries'}
-            data={[
-              {label: 'Indonesia', value: 'Indonesia'},
-              {label: 'Malaysia', value: 'Malaysia'},
-              {label: 'Singapura', value: 'Singapura'},
-            ]}
-            onValueChange={value => setForm('asal_negara', value)}
+            data={countries}
+            onValueChange={(label, value) => {
+              setForm('asal_negara', label);
+              getStates(value);
+              setCountryCode(value);
+            }}
           />
           <Gap height={5} />
           <DropdownComponent
             label="States/Provinces"
-            data={[
-              {label: 'NTT', value: 'NTT'},
-              {label: 'Maluku', value: 'Maluku'},
-              {label: 'Jakarta', value: 'Jakarta'},
-            ]}
-            onValueChange={value => setForm('kab_kota', value)}
+            data={states}
+            onValueChange={(label, value) => {
+              setForm('propinsi', label);
+              getCities(value);
+            }}
           />
           <Gap height={5} />
           <DropdownComponent
             label="Cities/Regions"
-            data={[
-              {label: 'Kupang', value: 'Kupang'},
-              {label: 'Jakarta', value: 'Jakarta'},
-              {label: 'Surabaya', value: 'Surabaya'},
-            ]}
-            onValueChange={value => setForm('kab_kota', value)}
+            data={cities}
+            onValueChange={(label, value) => {
+              setForm('kab_kota', label);
+            }}
           />
           <Textarea
             label="Address"
             numberOfLines={5}
             value={form.alamat}
             onChangeText={value => setForm('alamat', value)}
+          />
+          <Gap height={5} />
+          <Dropdown
+            label="Gender"
+            data={gender}
+            onValueChange={value => setForm('jk', value)}
           />
           <Gap height={5} />
           <DropdownComponent
@@ -165,7 +220,7 @@ export default function RegisterScreen() {
           {students && (
             <Input
               label="School/University"
-              value={form.alamat}
+              value={form.sekolah}
               onChangeText={value => setForm('sekolah', value)}
             />
           )}

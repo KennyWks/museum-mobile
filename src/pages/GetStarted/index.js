@@ -78,7 +78,7 @@ export default function GetStarted({navigation}) {
           <View style={styles.iconMenu}>
             <PopupMenu
               options={[
-                {label: 'Indonesia', value: 'indonesia'},
+                {label: 'Indonesian', value: 'indonesian'},
                 {label: 'English', value: 'english'},
               ]}
               label={

@@ -41,7 +41,7 @@ const DropdownComponent = ({label, data, onValueChange}) => {
         onBlur={() => setIsFocus(false)}
         onChange={item => {
           setValue(item.value);
-          onValueChange(item.value);
+          onValueChange(item.label, item.value);
           setIsFocus(false);
         }}
       />
