@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {colors} from '../../../utils';
 
 const Header = ({}) => {
   return (
@@ -12,5 +13,5 @@ export default Header;
 
 const styles = StyleSheet.create({
   container: {width: '100%', alignItems: 'center', margin: 10},
-  textHeader: {color: '#F5E8E4', fontSize: 20, fontWeight: '800'},
+  textHeader: {color: colors.text.default, fontSize: 20, fontWeight: '800'},
 });

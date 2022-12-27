@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
 import {StyleSheet, TextInput, View, Text} from 'react-native';
+import {colors} from '../../../utils';
 
 const Textarea = ({label, value, numberOfLines, onChangeText}) => {
-  const [border, setBorder] = useState('#F5E8E4');
+  const [border, setBorder] = useState(colors.border.default);
 
   const onFocusForm = () => {
-    setBorder('#F5C7A9');
+    setBorder(colors.border.secondary);
   };
 
   const onBlurForm = () => {
-    setBorder('#F5E8E4');
+    setBorder(colors.border.default);
   };
 
   return (
@@ -39,13 +40,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 6,
     fontFamily: 'Nunito-regular',
-    color: '#F5E8E4',
+    color: colors.text.default,
   },
   input: border => ({
     borderWidth: 1,
     borderRadius: 10,
     borderColor: border,
-    color: '#F5E8E4',
+    color: colors.border.default,
     textAlignVertical: 'top',
     paddingHorizontal: 12,
   }),

@@ -1,20 +1,21 @@
 import React, {useState} from 'react';
 import {StyleSheet, TextInput, View, Text} from 'react-native';
+import {colors} from '../../../utils';
 
 const Input = ({label, value, onChangeText}) => {
-  const [border, setBorder] = useState('#F5E8E4');
+  const [border, setBorder] = useState(colors.border.default);
 
   const onFocusForm = () => {
-    setBorder('#F5C7A9');
+    setBorder(colors.border.secondary);
   };
 
   const onBlurForm = () => {
-    setBorder('#F5E8E4');
+    setBorder(colors.border.default);
   };
 
   return (
     <View style={styles.cardInput}>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={styles.textLabel}>{label}</Text>
       <TextInput
         onFocus={onFocusForm}
         onBlur={onBlurForm}
@@ -32,17 +33,17 @@ const styles = StyleSheet.create({
   cardInput: {
     marginTop: 5,
   },
-  label: {
+  textLabel: {
     fontSize: 16,
     marginBottom: 6,
     fontFamily: 'Nunito-regular',
-    color: '#F5E8E4',
+    color: colors.text.default,
   },
   input: border => ({
     borderWidth: 1,
     borderRadius: 10,
     borderColor: border,
     padding: 12,
-    color: '#F5E8E4',
+    color: colors.border.default,
   }),
 });

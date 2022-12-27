@@ -1,5 +1,5 @@
 import axios from 'axios';
-export const ApiURL = 'http://192.168.96.60:8000';
+export const ApiURL = 'http://192.168.235.60:8000';
 
 const header = {
   'Content-Type': 'multipart/form-data',

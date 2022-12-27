@@ -1,11 +1,12 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
+import {colors} from '../../../utils';
 
 export default function Dropdown({label, data, onValueChange}) {
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={styles.textLabel}>{label}</Text>
       <RNPickerSelect
         placeholder={{label: `Select ${label}`, value: null}}
         onValueChange={onValueChange}
@@ -17,11 +18,11 @@ export default function Dropdown({label, data, onValueChange}) {
 }
 
 const styles = StyleSheet.create({
-  label: {color: '#F5E8E4', fontSize: 16},
+  textLabel: {color: colors.text.default, fontSize: 16},
   container: {
     borderWidth: 1,
     borderRadius: 10,
-    borderColor: '#F5E8E4',
+    borderColor: colors.border.default,
     padding: 12,
   },
 });
@@ -33,7 +34,7 @@ const pickerSelectStyles = StyleSheet.create({
     paddingHorizontal: 12,
     borderWidth: 1,
     borderRadius: 4,
-    color: '#F5E8E4',
+    color: colors.text.default,
     paddingRight: 30, // to ensure the text is never behind the icon
   },
   inputAndroid: {
@@ -42,7 +43,7 @@ const pickerSelectStyles = StyleSheet.create({
     paddingVertical: 12,
     borderWidth: 0.5,
     borderRadius: 8,
-    color: '#F5E8E4',
+    color: colors.text.default,
     paddingRight: 30, // to ensure the text is never behind the icon
   },
 });

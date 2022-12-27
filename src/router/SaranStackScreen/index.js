@@ -1,6 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {SaranScreen} from '../../pages';
+import {colors} from '../../utils';
 
 const Stack = createStackNavigator();
 
@@ -13,9 +14,9 @@ export default function SaranStackScreen() {
         options={{
           title: 'Recommendations',
           headerStyle: {
-            backgroundColor: '#030303',
+            backgroundColor: colors.dark,
           },
-          headerTintColor: '#fff',
+          headerTintColor: colors.text.default,
         }}
       />
     </Stack.Navigator>

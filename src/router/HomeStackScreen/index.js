@@ -1,6 +1,5 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {View} from 'react-native';
 import {GetStarted} from '../../pages';
 
 const Stack = createStackNavigator();

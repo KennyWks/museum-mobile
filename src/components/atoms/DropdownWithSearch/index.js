@@ -1,16 +1,17 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import {colors} from '../../../utils';
 
-const DropdownComponent = ({label, data, onValueChange}) => {
+const DropdownWithSearch = ({label, data, onValueChange}) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
   const renderLabel = () => {
     if (value || isFocus) {
       return (
-        <Text style={[styles.label, isFocus && {color: '#F5E8E4'}]}>
+        <Text
+          style={[styles.textLabel, isFocus && {color: colors.text.default}]}>
           {label}
         </Text>
       );
@@ -22,13 +23,16 @@ const DropdownComponent = ({label, data, onValueChange}) => {
     <View style={styles.container}>
       {renderLabel()}
       <Dropdown
-        style={[styles.dropdown, isFocus && {borderColor: '#F5E8E4'}]}
+        style={[
+          styles.dropdown,
+          isFocus && {borderColor: colors.border.default},
+        ]}
         placeholderStyle={styles.placeholderStyle}
-        selectedTextStyle={styles.selectedTextStyle}
+        selectedText={styles.selectedText}
         inputSearchStyle={styles.inputSearchStyle}
         iconStyle={styles.iconStyle}
-        containerStyle={{backgroundColor: '#030303'}}
-        activeColor={'#3d3c3c'}
+        containerStyle={{backgroundColor: colors.dark}}
+        activeColor={colors.secondary}
         data={data}
         search
         maxHeight={300}
@@ -49,22 +53,22 @@ const DropdownComponent = ({label, data, onValueChange}) => {
   );
 };
 
-export default DropdownComponent;
+export default DropdownWithSearch;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#030303',
+    backgroundColor: colors.dark,
   },
   dropdown: {
     height: 70,
-    borderColor: '#F5E8E4',
+    borderColor: colors.border.default,
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 8,
   },
-  label: {
+  textLabel: {
     position: 'absolute',
-    backgroundColor: '#030303',
+    backgroundColor: colors.dark,
     left: 2,
     top: 8,
     zIndex: 999,
@@ -74,9 +78,9 @@ const styles = StyleSheet.create({
   placeholderStyle: {
     fontSize: 16,
   },
-  selectedTextStyle: {
+  selectedText: {
     fontSize: 16,
-    color: '#F5E8E4',
+    color: colors.text.default,
   },
   iconStyle: {
     width: 20,
@@ -85,6 +89,6 @@ const styles = StyleSheet.create({
   inputSearchStyle: {
     height: 40,
     fontSize: 16,
-    backgroundColor: '#030303',
+    backgroundColor: colors.dark,
   },
 });

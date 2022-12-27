@@ -1,10 +1,11 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {colors} from '../../../utils';
 
 const DataRelic = ({label, value}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={styles.textLabel}>{label}</Text>
       <Text style={styles.value}>{value}</Text>
     </View>
   );
@@ -17,6 +18,11 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginRight: 5,
   },
-  label: {fontSize: 14, marginBottom: 5, color: '#F5E8E4', fontWeight: '700'},
-  value: {fontSize: 14, color: '#F5E8E4', textAlign: 'justify'},
+  textLabel: {
+    fontSize: 14,
+    marginBottom: 5,
+    color: colors.text.default,
+    fontWeight: '700',
+  },
+  textValue: {fontSize: 14, color: colors.text.default, textAlign: 'justify'},
 });

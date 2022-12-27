@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import {Text} from 'react-native';
+import {Text, StyleSheet} from 'react-native';
 import {
   Menu,
   MenuOption,
   MenuOptions,
   MenuTrigger,
 } from 'react-native-popup-menu';
+import {colors} from '../../../utils';
 
 export const PopupMenu = ({label, options, onSelect}) => {
   const [opened, setOpened] = useState(false);
@@ -31,8 +32,8 @@ export const PopupMenu = ({label, options, onSelect}) => {
       <MenuTrigger onPress={() => onTriggerPress()}>{label}</MenuTrigger>
       <MenuOptions>
         {options.map(data => (
-          <MenuOption style={{backgroundColor: '#3d3c3c'}} value={data.value}>
-            <Text style={{color: 'white'}}>{data.label}</Text>
+          <MenuOption style={styles.menuOption} value={data.value}>
+            <Text style={styles.textLabel}>{data.label}</Text>
           </MenuOption>
         ))}
       </MenuOptions>
@@ -41,3 +42,8 @@ export const PopupMenu = ({label, options, onSelect}) => {
 };
 
 export default PopupMenu;
+
+const styles = StyleSheet.create({
+  menuOption: {backgroundColor: colors.secondary},
+  textLabel: {color: colors.text.default},
+});

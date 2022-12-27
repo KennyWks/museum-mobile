@@ -7,6 +7,7 @@ import {
   ScannerStackScreen,
   SaranStackScreen,
 } from '../router';
+import {colors} from '../utils';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,7 +18,7 @@ const TabNavigator = () => {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: '#030303',
+          backgroundColor: colors.dark,
           borderRadius: 20,
           marginBottom: 10,
           marginTop: 5,
@@ -33,8 +34,8 @@ const TabNavigator = () => {
         tabBarLabelStyle: {
           fontSize: 12,
         },
-        tabBarActiveBackgroundColor: '#3d3c3c',
-        tabBarActiveTintColor: 'white',
+        tabBarActiveBackgroundColor: colors.secondary,
+        tabBarActiveTintColor: colors.text.default,
       }}>
       <Tab.Screen
         name="HomeStackScreen"
@@ -42,7 +43,7 @@ const TabNavigator = () => {
         options={{
           title: 'Home',
           tabBarIcon: () => (
-            <MiIcon name="home-outline" size={23} color={'white'} />
+            <MiIcon name="home-outline" size={23} color={colors.text.default} />
           ),
         }}
       />
@@ -52,7 +53,7 @@ const TabNavigator = () => {
         options={{
           title: 'Scanner',
           tabBarIcon: () => (
-            <MiIcon name="qrcode-scan" size={23} color={'white'} />
+            <MiIcon name="qrcode-scan" size={23} color={colors.text.default} />
           ),
         }}
       />
@@ -62,7 +63,11 @@ const TabNavigator = () => {
         options={{
           title: 'Register',
           tabBarIcon: () => (
-            <MiIcon name={'account-plus-outline'} size={23} color={'white'} />
+            <MiIcon
+              name={'account-plus-outline'}
+              size={23}
+              color={colors.text.default}
+            />
           ),
         }}
       />
@@ -72,7 +77,11 @@ const TabNavigator = () => {
         options={{
           title: 'Recommendation',
           tabBarIcon: () => (
-            <MiIcon name={'chat-alert-outline'} size={23} color={'white'} />
+            <MiIcon
+              name={'chat-alert-outline'}
+              size={23}
+              color={colors.text.default}
+            />
           ),
         }}
       />

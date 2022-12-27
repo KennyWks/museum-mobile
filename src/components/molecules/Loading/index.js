@@ -1,11 +1,12 @@
 import React from 'react';
 import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
+import {colors} from '../../../utils';
 
-export default function Scanner({navigation}) {
+export default function Scanner() {
   return (
     <View style={styles.wrapper}>
-      <ActivityIndicator size="large" color="blue" />
-      <Text style={styles.text}>Loading...</Text>
+      <ActivityIndicator size="large" color={colors.loading.logo} />
+      <Text style={styles.loadingText}>Loading...</Text>
     </View>
   );
 }
@@ -16,12 +17,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: colors.loading.background,
     width: '100%',
     height: '100%',
   },
-  text: {
+  loadingText: {
     fontSize: 18,
-    color: 'blue',
+    color: colors.text.default,
   },
 });

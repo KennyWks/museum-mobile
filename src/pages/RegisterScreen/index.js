@@ -9,7 +9,7 @@ import {
   Input,
   Loading,
   Textarea,
-  DropdownComponent,
+  DropdownWithSearch,
 } from '../../components';
 import {getData, postData} from '../../helpers/CRUD';
 import {useForm} from '../../utils';
@@ -166,7 +166,7 @@ export default function RegisterScreen() {
             onChangeText={value => setForm('nama_pengunjung', value)}
           />
           <Gap height={5} />
-          <DropdownComponent
+          <DropdownWithSearch
             label={'Countries'}
             data={countries}
             onValueChange={(label, value) => {
@@ -176,7 +176,7 @@ export default function RegisterScreen() {
             }}
           />
           <Gap height={5} />
-          <DropdownComponent
+          <DropdownWithSearch
             label="States/Provinces"
             data={states}
             onValueChange={(label, value) => {
@@ -185,7 +185,7 @@ export default function RegisterScreen() {
             }}
           />
           <Gap height={5} />
-          <DropdownComponent
+          <DropdownWithSearch
             label="Cities/Regions"
             data={cities}
             onValueChange={(label, value) => {
@@ -205,7 +205,7 @@ export default function RegisterScreen() {
             onValueChange={value => setForm('jk', value)}
           />
           <Gap height={5} />
-          <DropdownComponent
+          <DropdownWithSearch
             label="Jobs"
             data={jobs}
             onValueChange={value => {

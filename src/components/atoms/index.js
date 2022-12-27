@@ -3,7 +3,7 @@ import Gap from './Gap';
 import Input from './Input';
 import Dropdown from './Dropdown';
 import Textarea from './Textarea';
-import DropdownComponent from './DropdownComponent';
+import DropdownWithSearch from './DropdownWithSearch';
 import IconNavigation from './IconNavigation';
 import PopupMenu from './PopupMenu';
 
@@ -13,7 +13,7 @@ export {
   Input,
   Dropdown,
   Textarea,
-  DropdownComponent,
+  DropdownWithSearch,
   IconNavigation,
   PopupMenu,
 };

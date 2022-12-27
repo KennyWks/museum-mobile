@@ -1,6 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {RegisterScreen} from '../../pages';
+import {colors} from '../../utils';
 
 const Stack = createStackNavigator();
 
@@ -13,9 +14,9 @@ export default function RegisterStackScreen() {
         options={{
           title: 'Form Register',
           headerStyle: {
-            backgroundColor: '#030303',
+            backgroundColor: colors.dark,
           },
-          headerTintColor: '#fff',
+          headerTintColor: colors.text.default,
         }}
       />
     </Stack.Navigator>
