@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {SaranScreen} from '../../pages';
-import {colors} from '../../utils';
+import {colors, languages} from '../../utils';
 
 const Stack = createStackNavigator();
 
@@ -12,7 +12,7 @@ export default function SaranStackScreen() {
         name="SaranScreen"
         component={SaranScreen}
         options={{
-          title: 'Recommendations',
+          title: languages.formRecommendations.titleHeaderPage,
           headerStyle: {
             backgroundColor: colors.dark,
           },

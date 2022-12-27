@@ -4,7 +4,7 @@ import {showMessage} from 'react-native-flash-message';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Button, Gap, Input, Loading, Textarea} from '../../components';
 import {postData} from '../../helpers/CRUD';
-import {colors, useForm} from '../../utils';
+import {colors, languages, useForm} from '../../utils';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 export default function SaranScreen() {
@@ -77,22 +77,22 @@ export default function SaranScreen() {
       <View style={styles.page(tabBarHeight)}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Input
-            label="Name"
+            label={languages.formRecommendations.name}
             value={form.nama}
             onChangeText={value => setForm('nama', value)}
           />
           <Input
-            label="Email"
+            label={languages.formRecommendations.email}
             value={form.email}
             onChangeText={value => setForm('email', value)}
           />
           <Input
-            label="Phone Number"
+            label={languages.formRecommendations.phone}
             value={form.no_hp}
             onChangeText={value => setForm('no_hp', value)}
           />
           <Textarea
-            label="Recommendations"
+            label={languages.formRecommendations.recommendations}
             numberOfLines={10}
             value={form.saran}
             onChangeText={value => setForm('saran', value)}
