@@ -5,6 +5,7 @@ import {DataRelic, Loading} from '../../components';
 import {getData} from '../../helpers/CRUD';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {ImageSlider} from 'react-native-image-slider-banner';
+import {colors} from '../../utils';
 
 export default function ShowDataScreen({navigation, route}) {
   const {koleksi_id} = route.params;
@@ -37,7 +38,7 @@ export default function ShowDataScreen({navigation, route}) {
             data={koleksi.image}
             autoPlay={true}
             timer={3000}
-            closeIconColor="#fff"
+            closeIconColor={colors.text.default}
             key={koleksi.koleksi_id}
           />
           <View style={styles.textContent(tabBarHeight)}>
@@ -59,7 +60,7 @@ export default function ShowDataScreen({navigation, route}) {
 const styles = StyleSheet.create({
   imageContent: {
     flex: 1,
-    backgroundColor: '#030303',
+    backgroundColor: colors.dark,
   },
   image: {
     height: 400,
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
   },
   textContent: tabBarHeight => ({
     flex: 1,
-    backgroundColor: '#030303',
+    backgroundColor: colors.dark,
     marginBottom: tabBarHeight + 5,
   }),
   titleContainer: {
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 18,
-    color: '#F5E8E4',
+    color: colors.text.default,
     fontWeight: '800',
   },
 });

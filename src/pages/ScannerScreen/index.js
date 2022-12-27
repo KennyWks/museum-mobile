@@ -10,6 +10,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import {CameraScreen} from 'react-native-camera-kit';
+import {colors} from '../../utils/colors';
 
 export default function ScannerScreen({navigation, route}) {
   const [qrvalue, setQrvalue] = useState('');
@@ -78,11 +79,11 @@ export default function ScannerScreen({navigation, route}) {
             // Show/hide scan frame
             scanBarcode={true}
             // Can restrict for the QR Code only
-            laserColor={'blue'}
+            laserColor={colors.primaryOne}
             // Color can be of your choice
-            frameColor={'#F5C7A9'}
+            frameColor={colors.border.secondary}
             // If frame is visible then frame color
-            colorForScannerFrame={'black'}
+            colorForScannerFrame={colors.dark}
             // Scanner Frame color
             onReadCode={event =>
               onBarcodeScan(event.nativeEvent.codeStringValue)
@@ -115,7 +116,7 @@ export default function ScannerScreen({navigation, route}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: colors.page.background,
     padding: 10,
     alignItems: 'center',
   },
@@ -125,7 +126,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   textStyle: {
-    color: 'black',
+    color: colors.dark,
     fontSize: 16,
     textAlign: 'center',
     padding: 10,
@@ -133,18 +134,18 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     fontSize: 16,
-    color: 'white',
-    backgroundColor: 'green',
+    color: colors.page.background,
+    backgroundColor: colors.successOne,
     padding: 5,
     minWidth: 250,
   },
   buttonTextStyle: {
     padding: 5,
-    color: 'white',
+    color: colors.text.default,
     textAlign: 'center',
   },
   textLinkStyle: {
-    color: 'blue',
+    color: colors.primaryOne,
     paddingVertical: 20,
   },
 });

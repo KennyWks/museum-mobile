@@ -4,7 +4,7 @@ import {showMessage} from 'react-native-flash-message';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Button, Gap, Input, Loading, Textarea} from '../../components';
 import {postData} from '../../helpers/CRUD';
-import {useForm} from '../../utils';
+import {colors, useForm} from '../../utils';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 export default function SaranScreen() {
@@ -73,7 +73,7 @@ export default function SaranScreen() {
   };
 
   return (
-    <View style={{backgroundColor: '#030303', flex: 1}}>
+    <View style={styles.container}>
       <View style={styles.page(tabBarHeight)}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Input
@@ -107,11 +107,12 @@ export default function SaranScreen() {
 }
 
 const styles = StyleSheet.create({
+  container: {backgroundColor: colors.dark, flex: 1},
   page: tabBarHeight => ({
     flex: 1,
     paddingHorizontal: 20,
     paddingVertical: 3,
-    backgroundColor: '#030303',
+    backgroundColor: colors.dark,
     marginBottom: tabBarHeight + 15,
   }),
 });

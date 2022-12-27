@@ -14,6 +14,7 @@ import {getData, ApiURL} from '../../helpers/CRUD';
 import {IconNavigation, PopupMenu, Loading} from '../../components';
 import moment from 'moment';
 import 'moment/locale/id';
+import {colors} from '../../utils';
 
 export default function GetStarted({navigation}) {
   const tabBarHeight = useBottomTabBarHeight();
@@ -82,7 +83,11 @@ export default function GetStarted({navigation}) {
                 {label: 'English', value: 'english'},
               ]}
               label={
-                <IconNavigation name="translate" size={25} color="white" />
+                <IconNavigation
+                  name="translate"
+                  size={25}
+                  color={colors.text.default}
+                />
               }
               onSelect={value => console.log('translate', value)}
             />
@@ -92,7 +97,11 @@ export default function GetStarted({navigation}) {
                 {label: 'Server 2', value: '192.168.1.3'},
               ]}
               label={
-                <IconNavigation name="dots-vertical" size={25} color="white" />
+                <IconNavigation
+                  name="dots-vertical"
+                  size={25}
+                  color={colors.text.default}
+                />
               }
               onSelect={value => console.log('server', value)}
             />
@@ -133,7 +142,7 @@ export default function GetStarted({navigation}) {
                             .locale('en')
                             .format('MMMM DD, YYYY')}
                         </Text>
-                        <Text style={styles.titleCard}>
+                        <Text style={styles.titleCardEvents}>
                           {val.nama_kegiatan}
                         </Text>
                         <Text style={styles.titleShadow}>{val.keterangan}</Text>
@@ -164,7 +173,7 @@ export default function GetStarted({navigation}) {
                     onPress={() => {
                       Linking.openURL('https://www.google.com');
                     }}>
-                    <View style={styles.cardBerita}>
+                    <View style={styles.cardNews}>
                       <Text style={styles.newsTitle}>{val.judul}</Text>
                       <Text style={styles.newsPublishTime}>
                         Published at{' : '}
@@ -188,7 +197,7 @@ export default function GetStarted({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#030303',
+    backgroundColor: colors.dark,
     flex: 1,
   },
   iconMenu: {
@@ -211,25 +220,25 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: '900',
-    color: '#F5E8E4',
+    color: colors.text.default,
     marginVertical: 10,
     letterSpacing: 5,
   },
   listCardSatu: {
-    backgroundColor: '#030303',
+    backgroundColor: colors.dark,
     flex: 5,
     marginLeft: 20,
     marginRight: 5,
   },
   listCardDua: tabBarHeight => ({
-    backgroundColor: '#030303',
+    backgroundColor: colors.dark,
     flex: 5,
     marginLeft: 20,
     marginRight: 10,
     maxHeight: 700,
     marginBottom: tabBarHeight + 15,
   }),
-  cardBerita: {
+  cardNews: {
     marginBottom: 10,
   },
   cardItem: {
@@ -256,29 +265,29 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     paddingLeft: 10,
   },
-  titleCard: {
+  titleCardEvents: {
     fontSize: 20,
     fontWeight: '600',
     maxWidth: 150,
-    color: '#F5E8E4',
+    color: colors.text.default,
     marginVertical: 10,
   },
   titleShadow: {
     fontSize: 15,
     fontWeight: '500',
     maxWidth: 200,
-    color: '#bdbbbb',
+    color: colors.midDark,
   },
   newsTitle: {
     fontSize: 17,
     fontWeight: '700',
     maxWidth: 600,
-    color: '#F5E8E4',
+    color: colors.text.default,
     marginVertical: 8,
   },
   newsPublishTime: {
     fontSize: 12,
     fontWeight: '500',
-    color: '#bdbbbb',
+    color: colors.midDark,
   },
 });

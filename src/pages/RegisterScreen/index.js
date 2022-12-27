@@ -12,7 +12,7 @@ import {
   DropdownWithSearch,
 } from '../../components';
 import {getData, postData} from '../../helpers/CRUD';
-import {useForm} from '../../utils';
+import {colors, useForm} from '../../utils';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 export default function RegisterScreen() {
@@ -157,7 +157,7 @@ export default function RegisterScreen() {
   };
 
   return (
-    <View style={{backgroundColor: '#030303', flex: 1}}>
+    <View style={styles.container}>
       <View style={styles.page(tabBarHeight)}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Input
@@ -239,11 +239,12 @@ export default function RegisterScreen() {
 }
 
 const styles = StyleSheet.create({
+  container: {backgroundColor: colors.dark, flex: 1},
   page: tabBarHeight => ({
     flex: 1,
     paddingHorizontal: 20,
     paddingVertical: 3,
-    backgroundColor: '#030303',
+    backgroundColor: colors.dark,
     marginBottom: tabBarHeight + 15,
   }),
 });
