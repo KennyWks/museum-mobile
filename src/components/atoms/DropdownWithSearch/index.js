@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
-import {colors} from '../../../utils';
+import {colors, languages} from '../../../utils';
 
 const DropdownWithSearch = ({label, data, onValueChange}) => {
   const [value, setValue] = useState(null);
@@ -38,8 +38,8 @@ const DropdownWithSearch = ({label, data, onValueChange}) => {
         maxHeight={300}
         labelField="label"
         valueField="value"
-        placeholder={!isFocus ? 'Select ' + label : '...'}
-        searchPlaceholder="Search..."
+        placeholder={!isFocus ? languages.dropDown.placeholder + label : '...'}
+        searchPlaceholder={languages.dropDown.searchPlaceholder}
         value={value}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}

@@ -5,7 +5,7 @@ import {DataRelic, Loading} from '../../components';
 import {getData} from '../../helpers/CRUD';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {ImageSlider} from 'react-native-image-slider-banner';
-import {colors} from '../../utils';
+import {colors, languages} from '../../utils';
 
 export default function ShowDataScreen({navigation, route}) {
   const {koleksi_id} = route.params;
@@ -46,8 +46,14 @@ export default function ShowDataScreen({navigation, route}) {
               <Text style={styles.titleText}>{koleksi.nama_koleksi}</Text>
             </View>
             <ScrollView showsVerticalScrollIndicator={false}>
-              <DataRelic label="Kategori" value={koleksi.nama_kategori} />
-              <DataRelic label="Deskripsi" value={koleksi.deskripsi} />
+              <DataRelic
+                label={languages.showDataPage.subDataRelicHeader.label1}
+                value={koleksi.nama_kategori}
+              />
+              <DataRelic
+                label={languages.showDataPage.subDataRelicHeader.label2}
+                value={koleksi.deskripsi}
+              />
             </ScrollView>
           </View>
         </View>

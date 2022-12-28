@@ -7,7 +7,7 @@ import {
   ScannerStackScreen,
   SaranStackScreen,
 } from '../router';
-import {colors} from '../utils';
+import {colors, languages} from '../utils';
 
 const Tab = createBottomTabNavigator();
 
@@ -41,7 +41,7 @@ const TabNavigator = () => {
         name="HomeStackScreen"
         component={HomeStackScreen}
         options={{
-          title: 'Home',
+          title: languages.tabNavigationMenu.home,
           tabBarIcon: () => (
             <MiIcon name="home-outline" size={23} color={colors.text.default} />
           ),
@@ -51,7 +51,7 @@ const TabNavigator = () => {
         name="ScannerStackScreen"
         component={ScannerStackScreen}
         options={{
-          title: 'Scanner',
+          title: languages.tabNavigationMenu.scanner,
           tabBarIcon: () => (
             <MiIcon name="qrcode-scan" size={23} color={colors.text.default} />
           ),
@@ -61,7 +61,7 @@ const TabNavigator = () => {
         name="RegisterStackScreen"
         component={RegisterStackScreen}
         options={{
-          title: 'Register',
+          title: languages.tabNavigationMenu.register,
           tabBarIcon: () => (
             <MiIcon
               name={'account-plus-outline'}
@@ -75,7 +75,7 @@ const TabNavigator = () => {
         name="SaranStackScreen"
         component={SaranStackScreen}
         options={{
-          title: 'Recommendation',
+          title: languages.tabNavigationMenu.recommendations,
           tabBarIcon: () => (
             <MiIcon
               name={'chat-alert-outline'}

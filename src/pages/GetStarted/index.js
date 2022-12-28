@@ -14,7 +14,7 @@ import {getData, ApiURL} from '../../helpers/CRUD';
 import {IconNavigation, PopupMenu, Loading} from '../../components';
 import moment from 'moment';
 import 'moment/locale/id';
-import {colors} from '../../utils';
+import {colors, languages} from '../../utils';
 
 export default function GetStarted({navigation}) {
   const tabBarHeight = useBottomTabBarHeight();
@@ -109,7 +109,9 @@ export default function GetStarted({navigation}) {
           <View style={styles.content}>
             {/* Start Events Section */}
             <View style={styles.titleContainer}>
-              <Text style={styles.title}>Events</Text>
+              <Text style={styles.title}>
+                {languages.homePage.cardTitle.events}
+              </Text>
             </View>
             <View style={styles.listCardSatu}>
               <ScrollView
@@ -156,7 +158,9 @@ export default function GetStarted({navigation}) {
 
             {/* Start Berita section */}
             <View style={styles.titleContainer}>
-              <Text style={styles.title}>Articles</Text>
+              <Text style={styles.title}>
+                {languages.homePage.cardTitle.articles}
+              </Text>
             </View>
             <View style={styles.listCardDua(tabBarHeight)}>
               <ScrollView

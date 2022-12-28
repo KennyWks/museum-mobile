@@ -98,7 +98,11 @@ export default function SaranScreen() {
             onChangeText={value => setForm('saran', value)}
           />
           <Gap height={10} />
-          <Button onPress={onSave} title="Save" type="dark" />
+          <Button
+            onPress={onSave}
+            title={languages.button.buttonSave.label}
+            type="dark"
+          />
         </ScrollView>
       </View>
       {loading && <Loading />}

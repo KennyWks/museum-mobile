@@ -12,7 +12,7 @@ import {
   DropdownWithSearch,
 } from '../../components';
 import {getData, postData} from '../../helpers/CRUD';
-import {colors, useForm} from '../../utils';
+import {colors, languages, useForm} from '../../utils';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 
 export default function RegisterScreen() {
@@ -161,13 +161,13 @@ export default function RegisterScreen() {
       <View style={styles.page(tabBarHeight)}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Input
-            label="Name"
+            label={languages.formVisitors.name}
             value={form.nama_pengunjung}
             onChangeText={value => setForm('nama_pengunjung', value)}
           />
           <Gap height={5} />
           <DropdownWithSearch
-            label={'Countries'}
+            label={languages.formVisitors.nationality}
             data={countries}
             onValueChange={(label, value) => {
               setForm('asal_negara', label);
@@ -177,7 +177,7 @@ export default function RegisterScreen() {
           />
           <Gap height={5} />
           <DropdownWithSearch
-            label="States/Provinces"
+            label={languages.formVisitors.states_provinces}
             data={states}
             onValueChange={(label, value) => {
               setForm('propinsi', label);
@@ -186,27 +186,27 @@ export default function RegisterScreen() {
           />
           <Gap height={5} />
           <DropdownWithSearch
-            label="Cities/Regions"
+            label={languages.formVisitors.cities_regions}
             data={cities}
             onValueChange={(label, value) => {
               setForm('kab_kota', label);
             }}
           />
           <Textarea
-            label="Address"
+            label={languages.formVisitors.address}
             numberOfLines={5}
             value={form.alamat}
             onChangeText={value => setForm('alamat', value)}
           />
           <Gap height={5} />
           <Dropdown
-            label="Gender"
+            label={languages.formVisitors.gender}
             data={gender}
             onValueChange={value => setForm('jk', value)}
           />
           <Gap height={5} />
           <DropdownWithSearch
-            label="Jobs"
+            label={languages.formVisitors.jobs}
             data={jobs}
             onValueChange={value => {
               if (value === 'Students' || value === 'Pelajar/Mahasiswa') {
@@ -219,18 +219,22 @@ export default function RegisterScreen() {
           />
           {students && (
             <Input
-              label="School/University"
+              label={languages.formVisitors.school_college}
               value={form.sekolah}
               onChangeText={value => setForm('sekolah', value)}
             />
           )}
           <Input
-            label="Phone Number"
+            label={languages.formVisitors.phone_number}
             value={form.no_hp}
             onChangeText={value => setForm('no_hp', value)}
           />
           <Gap height={10} />
-          <Button onPress={onSave} title="Save" type="dark" />
+          <Button
+            onPress={onSave}
+            title={languages.button.buttonSave.label}
+            type="dark"
+          />
         </ScrollView>
       </View>
       {loading && <Loading />}

@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {ScannerScreen, ShowDataScreen} from '../../pages';
-import {colors} from '../../utils';
+import {colors, languages} from '../../utils';
 
 const Stack = createStackNavigator();
 
@@ -12,7 +12,7 @@ export default function ScannerStackScreen() {
         name="ScannerScreen"
         component={ScannerScreen}
         options={{
-          title: 'Scan QR Code',
+          title: languages.headerScannerPage.title,
           headerStyle: {
             backgroundColor: colors.dark,
           },
