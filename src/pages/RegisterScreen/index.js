@@ -40,14 +40,14 @@ function RegisterScreen() {
     asal_negara: '',
     propinsi: '',
     kab_kota: '',
-    pekerjaan: '',
+    pekerjaan_id: '',
     sekolah: '',
     alamat: '',
     no_hp: '',
   });
 
   const getGenderAndJobsOptionLanguage = async () => {
-    let condition = 'indonesian';
+    let condition = languages.language;
     if (condition === 'english') {
       setGender([
         {label: 'Male', value: 'Male'},
@@ -128,7 +128,7 @@ function RegisterScreen() {
         setCities([]);
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
       const data = error.response.data.errors;
       handleEachErrorMessage(data);
     }
@@ -153,13 +153,49 @@ function RegisterScreen() {
     }, 3000);
 
     setTimeout(() => {
+      if (data.asal_negara) {
+        showMessage({
+          message: data.asal_negara[0],
+          type: 'danger',
+        });
+      }
+    }, 6000);
+
+    setTimeout(() => {
+      if (data.propinsi) {
+        showMessage({
+          message: data.propinsi[0],
+          type: 'danger',
+        });
+      }
+    }, 9000);
+
+    setTimeout(() => {
+      if (data.kab_kota) {
+        showMessage({
+          message: data.kab_kota[0],
+          type: 'danger',
+        });
+      }
+    }, 12000);
+
+    setTimeout(() => {
+      if (data.pekerjaan_id) {
+        showMessage({
+          message: data.pekerjaan_id[0],
+          type: 'danger',
+        });
+      }
+    }, 15000);
+
+    setTimeout(() => {
       if (data.alamat) {
         showMessage({
           message: data.alamat[0],
           type: 'danger',
         });
       }
-    }, 6000);
+    }, 18000);
 
     setTimeout(() => {
       if (data.no_hp) {
@@ -168,7 +204,7 @@ function RegisterScreen() {
           type: 'danger',
         });
       }
-    }, 9000);
+    }, 21000);
   };
 
   return (
@@ -224,13 +260,14 @@ function RegisterScreen() {
           <DropdownWithSearch
             label={languages.formVisitors.jobs}
             data={jobs}
-            onValueChange={value => {
-              if (value === 'Students' || value === 'Pelajar/Mahasiswa') {
+            onValueChange={(label, value) => {
+              if (label === 'Students' || label === 'Pelajar/Mahasiswa') {
                 setStudents(true);
               } else {
                 setStudents(false);
               }
-              setForm('pekerjaan', value);
+              console.log(value);
+              setForm('pekerjaan_id', value);
             }}
           />
           {students && (

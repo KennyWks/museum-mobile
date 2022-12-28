@@ -3,6 +3,7 @@ import ActionType from './globalActionType';
 let globalState = {
   url: 'http://192.168.72.60:8083',
   languages: {
+    language: 'english',
     formVisitors: {
       titleHeaderPage: 'Register',
       name: 'Name',
@@ -69,6 +70,7 @@ const rootReducer = (state = globalState, action) => {
   let value = action.option;
   if (action.type === ActionType.CHANGE_LANGUAGE && value === 'indonesian') {
     globalState.languages = {
+      language: 'indonesian',
       formVisitors: {
         titleHeaderPage: 'Daftar',
         name: 'Nama',
@@ -130,6 +132,7 @@ const rootReducer = (state = globalState, action) => {
     };
   } else {
     globalState.languages = {
+      language: 'english',
       formVisitors: {
         titleHeaderPage: 'Register',
         name: 'Name',

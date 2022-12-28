@@ -66,7 +66,7 @@ function GetStarted({navigation}) {
       setEvents(resultEvents.data.data);
     } catch (error) {
       // console.log(error);
-      handleErrorMessage('Something Error');
+      handleErrorMessage('Something Error!');
     }
   };
 
@@ -152,7 +152,7 @@ function GetStarted({navigation}) {
                   <TouchableHighlight
                     key={i}
                     onPress={() => {
-                      Linking.openURL('https://www.google.com');
+                      Linking.openURL(`${ApiURL}/event/${val.kegiatan_id}`);
                     }}>
                     <View style={styles.cardItem}>
                       <View style={styles.cardImage}>
@@ -203,7 +203,7 @@ function GetStarted({navigation}) {
                   <TouchableHighlight
                     key={i}
                     onPress={() => {
-                      Linking.openURL('https://www.google.com');
+                      Linking.openURL(`${ApiURL}/artikel/${val.artikel_id}`);
                     }}>
                     <View style={styles.cardNews}>
                       <Text style={styles.newsTitle}>{val.judul}</Text>

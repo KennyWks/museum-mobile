@@ -30,7 +30,7 @@ export const PopupMenu = ({label, options, onSelect}) => {
       onBackdropPress={() => onBackdropPress()}
       onSelect={value => onOptionSelect(value)}>
       <MenuTrigger onPress={() => onTriggerPress()}>{label}</MenuTrigger>
-      <MenuOptions>
+      <MenuOptions style={styles.menuOptions}>
         {options.map(data => (
           <MenuOption style={styles.menuOption} value={data.value}>
             <Text style={styles.textLabel}>{data.label}</Text>
@@ -44,6 +44,14 @@ export const PopupMenu = ({label, options, onSelect}) => {
 export default PopupMenu;
 
 const styles = StyleSheet.create({
-  menuOption: {backgroundColor: colors.secondary},
+  menuOptions: {
+    backgroundColor: colors.dark,
+  },
+  menuOption: {
+    backgroundColor: colors.secondary,
+    padding: 13,
+    borderWidth: 0,
+    borderColor: colors.secondary,
+  },
   textLabel: {color: colors.text.default},
 });
