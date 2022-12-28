@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {StyleSheet, TextInput, View, Text} from 'react-native';
+import {StyleSheet, TextInput, View, Text, Platform} from 'react-native';
 import {colors} from '../../../utils';
 
-const Input = ({label, value, onChangeText}) => {
+const Input = ({label, value, onChangeText, numKeyboardPad}) => {
   const [border, setBorder] = useState(colors.border.default);
 
   const onFocusForm = () => {
@@ -11,6 +11,20 @@ const Input = ({label, value, onChangeText}) => {
 
   const onBlurForm = () => {
     setBorder(colors.border.default);
+  };
+
+  const changeNumKeyboardPad = args => {
+    let statusKeyboardPad = '';
+    if (args) {
+      if (Platform.OS === 'android') {
+        statusKeyboardPad = 'numeric';
+      } else {
+        statusKeyboardPad = 'number-pad';
+      }
+    } else {
+      statusKeyboardPad = 'default';
+    }
+    return statusKeyboardPad;
   };
 
   return (
@@ -22,6 +36,7 @@ const Input = ({label, value, onChangeText}) => {
         style={styles.input(border)}
         value={value}
         onChangeText={onChangeText}
+        keyboardType={changeNumKeyboardPad(numKeyboardPad)}
       />
     </View>
   );

@@ -1,9 +1,14 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
-import {colors, languages} from '../../../utils';
+import {colors} from '../../../utils';
+//redux toolkit
+import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 
-export default function Dropdown({label, data, onValueChange}) {
+function Dropdown({label, data, onValueChange}) {
+  const languages = useSelector(state => state.languages);
+
   return (
     <View style={styles.container}>
       <Text style={styles.textLabel}>{label}</Text>
@@ -19,6 +24,8 @@ export default function Dropdown({label, data, onValueChange}) {
     </View>
   );
 }
+
+export default connect()(Dropdown);
 
 const styles = StyleSheet.create({
   textLabel: {color: colors.text.default, fontSize: 16},

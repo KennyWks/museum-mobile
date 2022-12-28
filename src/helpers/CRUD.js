@@ -1,5 +1,4 @@
 import axios from 'axios';
-export const ApiURL = 'http://192.168.72.60:8083';
 
 const header = {
   'Content-Type': 'multipart/form-data',
@@ -7,7 +6,7 @@ const header = {
 
 export const postData = async (path, data) => {
   try {
-    const response = await axios.post(ApiURL + path, data, header);
+    const response = await axios.post(path, data, header);
     return response;
   } catch (error) {
     throw error;
@@ -16,7 +15,7 @@ export const postData = async (path, data) => {
 
 export const getData = async path => {
   try {
-    const response = await axios.get(ApiURL + path);
+    const response = await axios.get(path);
     return response;
   } catch (error) {
     throw error;

@@ -1,14 +1,18 @@
+import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Button, Gap, Input, Loading, Textarea} from '../../components';
 import {postData} from '../../helpers/CRUD';
-import {colors, languages, useForm} from '../../utils';
-import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
+import {colors, useForm} from '../../utils';
+//redux toolkit
+import {connect, useSelector} from 'react-redux';
 
-export default function SaranScreen() {
+function SaranScreen() {
   const tabBarHeight = useBottomTabBarHeight();
+  const ApiURL = useSelector(state => state.url);
+  const languages = useSelector(state => state.languages);
   const [form, setForm] = useForm({
     nama: '',
     email: '',
@@ -20,7 +24,7 @@ export default function SaranScreen() {
   const onSave = async () => {
     setLoading(true);
     try {
-      const result = await postData('/api/saran', form);
+      const result = await postData(`${ApiURL}/api/saran`, form);
       const {message, success} = result.data;
       if (success) {
         setForm('reset');
@@ -31,12 +35,12 @@ export default function SaranScreen() {
       }
     } catch (error) {
       const data = error.response.data.errors;
-      handleEachMessage(data);
+      handleEachErrorMessage(data);
     }
     setLoading(false);
   };
 
-  const handleEachMessage = data => {
+  const handleEachErrorMessage = data => {
     if (data.nama) {
       showMessage({
         message: data.nama[0],
@@ -80,16 +84,19 @@ export default function SaranScreen() {
             label={languages.formRecommendations.name}
             value={form.nama}
             onChangeText={value => setForm('nama', value)}
+            numKeyboardPad={false}
           />
           <Input
             label={languages.formRecommendations.email}
             value={form.email}
             onChangeText={value => setForm('email', value)}
+            numKeyboardPad={false}
           />
           <Input
             label={languages.formRecommendations.phone}
             value={form.no_hp}
             onChangeText={value => setForm('no_hp', value)}
+            numKeyboardPad={true}
           />
           <Textarea
             label={languages.formRecommendations.recommendations}
@@ -109,6 +116,8 @@ export default function SaranScreen() {
     </View>
   );
 }
+
+export default connect()(SaranScreen);
 
 const styles = StyleSheet.create({
   container: {backgroundColor: colors.dark, flex: 1},

@@ -1,16 +1,20 @@
+import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
+import {ImageSlider} from 'react-native-image-slider-banner';
 import {DataRelic, Loading} from '../../components';
 import {getData} from '../../helpers/CRUD';
-import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
-import {ImageSlider} from 'react-native-image-slider-banner';
-import {colors, languages} from '../../utils';
+import {colors} from '../../utils';
+//redux toolkit
+import {connect, useSelector} from 'react-redux';
 
-export default function ShowDataScreen({navigation, route}) {
+function ShowDataScreen({navigation, route}) {
   const {koleksi_id} = route.params;
 
   const tabBarHeight = useBottomTabBarHeight();
+  const ApiURL = useSelector(state => state.url);
+  const languages = useSelector(state => state.languages);
   const [koleksi, setKoleksi] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -22,7 +26,7 @@ export default function ShowDataScreen({navigation, route}) {
     setKoleksi([]);
     setLoading(true);
     try {
-      const result = await getData(`/api/getKoleksi/${koleksi_id}`);
+      const result = await getData(`${ApiURL}/api/getKoleksi/${koleksi_id}`);
       setKoleksi(result.data.data);
     } catch (error) {
       console.log(error.response);
@@ -62,6 +66,8 @@ export default function ShowDataScreen({navigation, route}) {
     </>
   );
 }
+
+export default connect()(ShowDataScreen);
 
 const styles = StyleSheet.create({
   imageContent: {

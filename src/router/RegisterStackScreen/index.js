@@ -1,18 +1,21 @@
-import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
+import React from 'react';
+import {connect, useSelector} from 'react-redux';
 import {RegisterScreen} from '../../pages';
 import {colors} from '../../utils';
 
 const Stack = createStackNavigator();
 
-export default function RegisterStackScreen() {
+function RegisterStackScreen() {
+  const languages = useSelector(state => state.languages);
+
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="RegisterScreen"
         component={RegisterScreen}
         options={{
-          title: 'Form Register',
+          title: languages.formVisitors.titleHeaderPage,
           headerStyle: {
             backgroundColor: colors.dark,
           },
@@ -22,3 +25,5 @@ export default function RegisterStackScreen() {
     </Stack.Navigator>
   );
 }
+
+export default connect()(RegisterStackScreen);

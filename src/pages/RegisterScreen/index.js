@@ -1,3 +1,4 @@
+import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
@@ -5,23 +6,26 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {
   Button,
   Dropdown,
+  DropdownWithSearch,
   Gap,
   Input,
   Loading,
   Textarea,
-  DropdownWithSearch,
 } from '../../components';
 import {getData, postData} from '../../helpers/CRUD';
-import {colors, languages, useForm} from '../../utils';
-import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
+import {colors, useForm} from '../../utils';
+//redux toolkit
+import {connect, useSelector} from 'react-redux';
 
-export default function RegisterScreen() {
+function RegisterScreen() {
   useEffect(() => {
     getCountries();
     getGenderAndJobsOptionLanguage();
   }, []);
 
   const tabBarHeight = useBottomTabBarHeight();
+  const ApiURL = useSelector(state => state.url);
+  const languages = useSelector(state => state.languages);
   const [countryCode, setCountryCode] = useState([]);
   const [countries, setCountries] = useState([]);
   const [states, setStates] = useState([]);
@@ -56,28 +60,37 @@ export default function RegisterScreen() {
       ]);
     }
     try {
-      const result = await getData(`/api/getPekerjaan/${condition}`);
+      const result = await getData(`${ApiURL}/api/getPekerjaan/${condition}`);
       setJobs(result.data.data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      handleErrorMessage('Something Error!');
     }
   };
 
   const getCountries = async () => {
     setLoading(true);
     try {
-      const result = await getData('/api/getCountries');
+      const result = await getData(`${ApiURL}/api/getCountries`);
       setCountries(result.data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      handleErrorMessage('Something Error!');
     }
     setLoading(false);
+  };
+
+  const handleErrorMessage = message => {
+    showMessage({
+      message: message,
+      type: 'danger',
+    });
   };
 
   const getStates = async value => {
     setLoading(true);
     try {
-      const result = await getData(`/api/getStates/${value}`);
+      const result = await getData(`${ApiURL}/api/getStates/${value}`);
       setStates(result.data);
       setCities([]);
     } catch (error) {
@@ -89,7 +102,9 @@ export default function RegisterScreen() {
   const getCities = async value => {
     setLoading(true);
     try {
-      const result = await getData(`/api/getCities/${countryCode}/${value}`);
+      const result = await getData(
+        `${ApiURL}/api/getCities/${countryCode}/${value}`,
+      );
       setCities(result.data);
     } catch (error) {
       console.log(error);
@@ -100,7 +115,7 @@ export default function RegisterScreen() {
   const onSave = async () => {
     setLoading(true);
     try {
-      const result = await postData('/api/kunjungan', form);
+      const result = await postData(`${ApiURL}/api/kunjungan`, form);
       const {message, success} = result.data;
       if (success) {
         setForm('reset');
@@ -115,12 +130,12 @@ export default function RegisterScreen() {
     } catch (error) {
       console.log(error);
       const data = error.response.data.errors;
-      handleEachMessage(data);
+      handleEachErrorMessage(data);
     }
     setLoading(false);
   };
 
-  const handleEachMessage = data => {
+  const handleEachErrorMessage = data => {
     if (data.nama_pengunjung) {
       showMessage({
         message: data.nama_pengunjung[0],
@@ -164,6 +179,7 @@ export default function RegisterScreen() {
             label={languages.formVisitors.name}
             value={form.nama_pengunjung}
             onChangeText={value => setForm('nama_pengunjung', value)}
+            numKeyboardPad={false}
           />
           <Gap height={5} />
           <DropdownWithSearch
@@ -222,12 +238,14 @@ export default function RegisterScreen() {
               label={languages.formVisitors.school_college}
               value={form.sekolah}
               onChangeText={value => setForm('sekolah', value)}
+              numKeyboardPad={false}
             />
           )}
           <Input
             label={languages.formVisitors.phone_number}
             value={form.no_hp}
             onChangeText={value => setForm('no_hp', value)}
+            numKeyboardPad={true}
           />
           <Gap height={10} />
           <Button
@@ -241,6 +259,8 @@ export default function RegisterScreen() {
     </View>
   );
 }
+
+export default connect()(RegisterScreen);
 
 const styles = StyleSheet.create({
   container: {backgroundColor: colors.dark, flex: 1},

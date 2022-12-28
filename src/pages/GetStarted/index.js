@@ -1,22 +1,26 @@
+import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
+import moment from 'moment';
+import 'moment/locale/id';
 import React, {useEffect, useState} from 'react';
 import {
   Image,
+  Linking,
+  RefreshControl,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableHighlight,
   View,
-  Linking,
-  RefreshControl,
-  ScrollView,
 } from 'react-native';
-import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
-import {getData, ApiURL} from '../../helpers/CRUD';
-import {IconNavigation, PopupMenu, Loading} from '../../components';
-import moment from 'moment';
-import 'moment/locale/id';
-import {colors, languages} from '../../utils';
+import {IconNavigation, Loading, PopupMenu} from '../../components';
+import {getData} from '../../helpers/CRUD';
+import {colors} from '../../utils';
+//redux toolkit
+import {connect, useDispatch, useSelector} from 'react-redux';
+import ActionType from '../../redux/reducer/globalActionType';
+import {showMessage} from 'react-native-flash-message';
 
-export default function GetStarted({navigation}) {
+function GetStarted({navigation}) {
   const tabBarHeight = useBottomTabBarHeight();
   // const [results, setResult] = useState([]);
   const [articles, setArticles] = useState([]);
@@ -24,6 +28,10 @@ export default function GetStarted({navigation}) {
   const [loading, setLoading] = useState(false);
   const [refreshingEvents, setRefreshingEvents] = React.useState(false);
   const [refreshingArticles, setRefreshingArticles] = React.useState(false);
+
+  const languages = useSelector(state => state.languages);
+  const ApiURL = useSelector(state => state.url);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // fetchRequest();
@@ -44,19 +52,21 @@ export default function GetStarted({navigation}) {
 
   const getArticles = async () => {
     try {
-      const resultArticles = await getData('/api/getArtikel');
+      const resultArticles = await getData(`${ApiURL}/api/getArtikel`);
       setArticles(resultArticles.data.data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      handleErrorMessage('Something Error!');
     }
   };
 
   const getEvents = async () => {
     try {
-      const resultEvents = await getData('/api/getKegiatan');
+      const resultEvents = await getData(`${ApiURL}/api/getKegiatan`);
       setEvents(resultEvents.data.data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      handleErrorMessage('Something Error');
     }
   };
 
@@ -72,40 +82,56 @@ export default function GetStarted({navigation}) {
     setRefreshingArticles(false);
   }, []);
 
+  const handleErrorMessage = message => {
+    showMessage({
+      message: message,
+      type: 'danger',
+    });
+  };
+
   return (
     <>
-      {!loading && (
-        <View style={styles.container}>
-          <View style={styles.iconMenu}>
-            <PopupMenu
-              options={[
-                {label: 'Indonesian', value: 'indonesian'},
-                {label: 'English', value: 'english'},
-              ]}
-              label={
-                <IconNavigation
-                  name="translate"
-                  size={25}
-                  color={colors.text.default}
-                />
-              }
-              onSelect={value => console.log('translate', value)}
-            />
-            <PopupMenu
-              options={[
-                {label: 'Server 1', value: '192.168.1.1'},
-                {label: 'Server 2', value: '192.168.1.3'},
-              ]}
-              label={
-                <IconNavigation
-                  name="dots-vertical"
-                  size={25}
-                  color={colors.text.default}
-                />
-              }
-              onSelect={value => console.log('server', value)}
-            />
-          </View>
+      <View style={styles.container}>
+        <View style={styles.iconMenu}>
+          <PopupMenu
+            options={[
+              {label: 'Indonesian', value: 'indonesian'},
+              {label: 'English', value: 'english'},
+            ]}
+            label={
+              <IconNavigation
+                name="translate"
+                size={25}
+                color={colors.text.default}
+              />
+            }
+            onSelect={value => {
+              setLoading(true);
+              dispatch({type: ActionType.CHANGE_LANGUAGE, option: value});
+              setLoading(false);
+            }}
+          />
+          <PopupMenu
+            options={[
+              {
+                label: languages.popupMenu.label,
+                value: languages.popupMenu.label,
+              },
+            ]}
+            label={
+              <IconNavigation
+                name="dots-vertical"
+                size={25}
+                color={colors.text.default}
+              />
+            }
+            onSelect={() => {
+              navigation.replace('ChangeURLScreen');
+            }}
+          />
+        </View>
+
+        {!loading && (
           <View style={styles.content}>
             {/* Start Events Section */}
             <View style={styles.titleContainer}>
@@ -135,7 +161,9 @@ export default function GetStarted({navigation}) {
                           // source={{
                           //   uri: val.urls.small,
                           // }}
-                          source={{uri: ApiURL + val.gambar + '?' + new Date()}}
+                          source={{
+                            uri: ApiURL + val.gambar + '?' + new Date(),
+                          }}
                         />
                       </View>
                       <View style={styles.cardDetail}>
@@ -192,12 +220,13 @@ export default function GetStarted({navigation}) {
             </View>
             {/* End Berita section */}
           </View>
-        </View>
-      )}
+        )}
+      </View>
       {loading && <Loading />}
     </>
   );
 }
+export default connect()(GetStarted);
 
 const styles = StyleSheet.create({
   container: {

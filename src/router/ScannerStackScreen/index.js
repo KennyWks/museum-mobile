@@ -1,11 +1,14 @@
-import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
+import React from 'react';
+import {connect, useSelector} from 'react-redux';
 import {ScannerScreen, ShowDataScreen} from '../../pages';
-import {colors, languages} from '../../utils';
+import {colors} from '../../utils';
 
 const Stack = createStackNavigator();
 
-export default function ScannerStackScreen() {
+function ScannerStackScreen() {
+  const languages = useSelector(state => state.languages);
+
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -27,3 +30,5 @@ export default function ScannerStackScreen() {
     </Stack.Navigator>
   );
 }
+
+export default connect()(ScannerStackScreen);

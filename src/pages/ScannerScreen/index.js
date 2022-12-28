@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {
-  SafeAreaView,
-  Text,
-  View,
   Linking,
-  TouchableHighlight,
   PermissionsAndroid,
   Platform,
+  SafeAreaView,
   StyleSheet,
+  Text,
+  TouchableHighlight,
+  View,
 } from 'react-native';
 import {CameraScreen} from 'react-native-camera-kit';
 import {colors} from '../../utils/colors';

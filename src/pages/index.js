@@ -1,9 +1,10 @@
-import Splash from './Splash';
+import ChangeURLScreen from './ChangeURLScreen';
 import GetStarted from './GetStarted';
-import ShowDataScreen from './ShowDataScreen';
-import ScannerScreen from './ScannerScreen';
 import RegisterScreen from './RegisterScreen';
 import SaranScreen from './SaranScreen';
+import ScannerScreen from './ScannerScreen';
+import ShowDataScreen from './ShowDataScreen';
+import Splash from './Splash';
 
 export {
   Splash,
@@ -12,4 +13,5 @@ export {
   ScannerScreen,
   RegisterScreen,
   SaranScreen,
+  ChangeURLScreen,
 };

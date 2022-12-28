@@ -1,11 +1,15 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
-import {colors, languages} from '../../../utils';
+import {colors} from '../../../utils';
+//redux toolkit
+import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 const DropdownWithSearch = ({label, data, onValueChange}) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
+  const languages = useSelector(state => state.languages);
 
   const renderLabel = () => {
     if (value || isFocus) {
@@ -53,7 +57,7 @@ const DropdownWithSearch = ({label, data, onValueChange}) => {
   );
 };
 
-export default DropdownWithSearch;
+export default connect()(DropdownWithSearch);
 
 const styles = StyleSheet.create({
   container: {
