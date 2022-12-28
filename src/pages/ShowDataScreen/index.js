@@ -6,6 +6,7 @@ import {ImageSlider} from 'react-native-image-slider-banner';
 import {DataRelic, Loading} from '../../components';
 import {getData} from '../../helpers/CRUD';
 import {colors} from '../../utils';
+import {showMessage} from 'react-native-flash-message';
 //redux toolkit
 import {connect, useSelector} from 'react-redux';
 
@@ -29,9 +30,17 @@ function ShowDataScreen({navigation, route}) {
       const result = await getData(`${ApiURL}/api/getKoleksi/${koleksi_id}`);
       setKoleksi(result.data.data);
     } catch (error) {
-      console.log(error.response);
+      // console.log(error.response);
+      handleErrorMessage('Something Error!');
     }
     setLoading(false);
+  };
+
+  const handleErrorMessage = message => {
+    showMessage({
+      message: message,
+      type: 'danger',
+    });
   };
 
   return (

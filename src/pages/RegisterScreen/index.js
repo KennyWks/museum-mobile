@@ -128,7 +128,7 @@ function RegisterScreen() {
         setCities([]);
       }
     } catch (error) {
-      console.log(error.response);
+      // console.log(error.response);
       const data = error.response.data.errors;
       handleEachErrorMessage(data);
     }
@@ -266,7 +266,6 @@ function RegisterScreen() {
               } else {
                 setStudents(false);
               }
-              console.log(value);
               setForm('pekerjaan_id', value);
             }}
           />
