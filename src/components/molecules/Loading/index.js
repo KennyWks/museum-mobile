@@ -1,15 +1,19 @@
 import React from 'react';
 import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
+import {connect, useSelector} from 'react-redux';
 import {colors} from '../../../utils';
 
-export default function Scanner() {
+function Loading() {
+  const languages = useSelector(state => state.languages);
   return (
     <View style={styles.wrapper}>
       <ActivityIndicator size="large" color={colors.loading.logo} />
-      <Text style={styles.loadingText}>Loading...</Text>
+      <Text style={styles.loadingText}>{languages.loading}</Text>
     </View>
   );
 }
+
+export default connect()(Loading);
 
 const styles = StyleSheet.create({
   wrapper: {

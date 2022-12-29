@@ -4,16 +4,13 @@ import TabNavigator from './TabNavigator';
 import {Splash} from './pages';
 import FlashMessage from 'react-native-flash-message';
 import {MenuProvider} from 'react-native-popup-menu';
-
+import {Loading} from './components';
 //redux toolkit
 import {Provider} from 'react-redux';
-import {createStore, applyMiddleware} from 'redux';
-import rootReducer from './redux/reducer/globalReducer';
-import thunk from 'redux-thunk';
+import {store} from './utils/store/index';
 
 export default function App() {
   const [view, setView] = useState(<Splash />);
-  const storeRedux = createStore(rootReducer, applyMiddleware(thunk));
 
   useEffect(() => {
     setTimeout(() => {
@@ -23,7 +20,7 @@ export default function App() {
 
   return (
     <>
-      <Provider store={storeRedux}>
+      <Provider store={store}>
         <NavigationContainer>
           <MenuProvider>{view}</MenuProvider>
         </NavigationContainer>

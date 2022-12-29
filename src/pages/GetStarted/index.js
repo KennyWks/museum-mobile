@@ -15,6 +15,7 @@ import {
 import {IconNavigation, Loading, PopupMenu} from '../../components';
 import {getData} from '../../helpers/CRUD';
 import {colors} from '../../utils';
+import RNRestart from 'react-native-restart';
 //redux toolkit
 import {connect, useDispatch, useSelector} from 'react-redux';
 import ActionType from '../../redux/reducer/globalActionType';
@@ -107,8 +108,11 @@ function GetStarted({navigation}) {
             }
             onSelect={value => {
               setLoading(true);
-              dispatch({type: ActionType.CHANGE_LANGUAGE, option: value});
-              setLoading(false);
+              setTimeout(() => {
+                dispatch({type: ActionType.CHANGE_LANGUAGE, option: value});
+                setLoading(false);
+                // RNRestart.Restart();
+              }, 3000);
             }}
           />
           <PopupMenu

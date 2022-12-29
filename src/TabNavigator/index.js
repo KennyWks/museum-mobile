@@ -1,5 +1,5 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import MiIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   HomeStackScreen,
@@ -10,10 +10,17 @@ import {
 import {colors} from '../utils';
 //redux toolkit
 import {connect} from 'react-redux';
+import {createNavigationContainerRef} from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = props => {
+  const navigationRef = createNavigationContainerRef();
+
+  useEffect(() => {
+    console.log(navigationRef);
+  }, [props]);
+
   return (
     <Tab.Navigator
       initialRouteName="HomeStackScreen"
@@ -43,35 +50,30 @@ const TabNavigator = props => {
         name="HomeStackScreen"
         component={HomeStackScreen}
         options={{
-          title: props.languages.tabNavigationMenu.home,
+          // title: props.languages.tabNavigationMenu.home,
+          title: '',
           tabBarIcon: () => (
             <MiIcon name="home-outline" size={23} color={colors.text.default} />
           ),
-          unmountOnBlur: true,
         }}
-        listeners={({navigation}) => ({
-          blur: () => navigation.setParams({params: undefined}),
-        })}
       />
       <Tab.Screen
         name="ScannerStackScreen"
         component={ScannerStackScreen}
         options={{
-          title: props.languages.tabNavigationMenu.scanner,
+          // title: props.languages.tabNavigationMenu.scanner,
+          title: '',
           tabBarIcon: () => (
             <MiIcon name="qrcode-scan" size={23} color={colors.text.default} />
           ),
-          unmountOnBlur: true,
         }}
-        listeners={({navigation}) => ({
-          blur: () => navigation.setParams({params: undefined}),
-        })}
       />
       <Tab.Screen
         name="RegisterStackScreen"
         component={RegisterStackScreen}
         options={{
-          title: props.languages.tabNavigationMenu.register,
+          // title: props.languages.tabNavigationMenu.register,
+          title: '',
           tabBarIcon: () => (
             <MiIcon
               name={'account-plus-outline'}
@@ -79,17 +81,14 @@ const TabNavigator = props => {
               color={colors.text.default}
             />
           ),
-          unmountOnBlur: true,
         }}
-        listeners={({navigation}) => ({
-          blur: () => navigation.setParams({params: undefined}),
-        })}
       />
       <Tab.Screen
         name="SaranStackScreen"
         component={SaranStackScreen}
         options={{
-          title: props.languages.tabNavigationMenu.recommendations,
+          // title: props.languages.tabNavigationMenu.recommendations,
+          title: '',
           tabBarIcon: () => (
             <MiIcon
               name={'chat-alert-outline'}
@@ -97,11 +96,7 @@ const TabNavigator = props => {
               color={colors.text.default}
             />
           ),
-          unmountOnBlur: true,
         }}
-        listeners={({navigation}) => ({
-          blur: () => navigation.setParams({params: undefined}),
-        })}
       />
     </Tab.Navigator>
   );

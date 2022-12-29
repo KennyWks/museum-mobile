@@ -94,7 +94,8 @@ function RegisterScreen() {
       setStates(result.data);
       setCities([]);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      handleErrorMessage('Something Error!');
     }
     setLoading(false);
   };
@@ -107,7 +108,8 @@ function RegisterScreen() {
       );
       setCities(result.data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      handleErrorMessage('Something Error!');
     }
     setLoading(false);
   };
