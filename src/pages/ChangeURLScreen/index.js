@@ -35,7 +35,7 @@ function ChangeURLScreen() {
         <View style={styles.container}>
           <View style={styles.page(tabBarHeight)}>
             <Input
-              label={`${languages.example}192.168.1.1`}
+              label={languages.example}
               value={url}
               onChangeText={value => setUrl(value)}
               numKeyboardPad={false}

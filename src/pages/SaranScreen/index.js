@@ -34,8 +34,16 @@ function SaranScreen() {
         });
       }
     } catch (error) {
+      // console.log(error.response);
       const data = error.response.data.errors;
-      handleEachErrorMessage(data);
+      if (data) {
+        handleEachErrorMessage(data);
+      } else {
+        showMessage({
+          message: 'Something Error',
+          type: 'danger',
+        });
+      }
     }
     setLoading(false);
   };

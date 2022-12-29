@@ -28,7 +28,16 @@ function ShowDataScreen({navigation, route}) {
     setLoading(true);
     try {
       const result = await getData(`${ApiURL}/api/getKoleksi/${koleksi_id}`);
-      setKoleksi(result.data.data);
+      const data = result.data.data;
+      setKoleksi({
+        nama: data.nama,
+        deskripsi: data.deskripsi,
+        asal: data.asal,
+        image: [
+          {img: `${ApiURL}${data.image}`},
+          {img: `${ApiURL}${data.image_detail}`},
+        ],
+      });
     } catch (error) {
       // console.log(error.response);
       handleErrorMessage('Something Error!');
@@ -56,12 +65,16 @@ function ShowDataScreen({navigation, route}) {
           />
           <View style={styles.textContent(tabBarHeight)}>
             <View style={styles.titleContainer}>
-              <Text style={styles.titleText}>{koleksi.nama_koleksi}</Text>
+              <Text style={styles.titleText}>{koleksi.nama}</Text>
             </View>
             <ScrollView showsVerticalScrollIndicator={false}>
-              <DataRelic
+              {/* <DataRelic
                 label={languages.showDataPage.subDataRelicHeader.label1}
                 value={koleksi.nama_kategori}
+              /> */}
+              <DataRelic
+                label={languages.showDataPage.subDataRelicHeader.label3}
+                value={koleksi.asal}
               />
               <DataRelic
                 label={languages.showDataPage.subDataRelicHeader.label2}

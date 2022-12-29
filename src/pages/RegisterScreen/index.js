@@ -130,7 +130,11 @@ function RegisterScreen() {
     } catch (error) {
       // console.log(error.response);
       const data = error.response.data.errors;
-      handleEachErrorMessage(data);
+      if (data) {
+        handleEachErrorMessage(data);
+      } else {
+        handleErrorMessage('Something Error!');
+      }
     }
     setLoading(false);
   };
@@ -233,7 +237,9 @@ function RegisterScreen() {
             data={states}
             onValueChange={(label, value) => {
               setForm('propinsi', label);
-              getCities(value);
+              if (value) {
+                getCities(value);
+              }
             }}
           />
           <Gap height={5} />

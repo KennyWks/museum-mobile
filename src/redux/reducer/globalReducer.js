@@ -1,136 +1,76 @@
 import ActionType from './globalActionType';
 
 let globalState = {
-  url: 'http://192.168.72.60:8083',
+  url: 'http://192.168.1.11:8083',
   languages: {
-    language: 'english',
+    language: 'indonesian',
     formVisitors: {
-      titleHeaderPage: 'Register',
-      name: 'Name',
-      nationality: 'Your Nationality',
-      states_provinces: 'Your States/Provinces',
-      cities_regions: 'Your Cities/Regions',
-      address: 'Address',
-      gender: 'Gender',
-      jobs: 'Your Jobs',
-      school_college: 'Your School/University',
-      phone_number: 'Phone Number',
+      titleHeaderPage: 'Daftar',
+      name: 'Nama',
+      nationality: 'Asal Negara',
+      states_provinces: 'Propinsi',
+      cities_regions: 'Kota/Kabupaten',
+      address: 'Alamat',
+      gender: 'Jenis Kelamin',
+      jobs: 'Pekerjaan',
+      school_college: 'Nama Sekolah/Perguruan Tinggi',
+      phone_number: 'Nomor HP',
     },
     formRecommendations: {
-      titleHeaderPage: 'Recommendations',
-      name: 'Name',
-      email: 'Email Address',
-      phone: 'HandPhone Number',
-      recommendations: 'Recommendations',
+      titleHeaderPage: 'Saran',
+      name: 'Nama',
+      email: 'Alamat Email',
+      phone: 'Nomor HP',
+      recommendations: 'Saran',
     },
     tabNavigationMenu: {
-      home: 'Home',
-      scanner: 'Scanner',
-      register: 'Register',
-      recommendations: 'Recommend',
+      home: 'Beranda',
+      scanner: 'Pemindai',
+      register: 'Daftar',
+      recommendations: 'Saran',
     },
     headerScannerPage: {
-      title: 'Scan QR Code',
+      title: 'Pindai QR Code',
     },
     headerChangeURLPage: {
-      title: 'Change URL Server',
+      title: 'Ubah URL Server',
     },
     homePage: {
       cardTitle: {
-        events: 'Events',
-        articles: 'Articles',
+        events: 'Kegiatan',
+        articles: 'Artikel',
       },
     },
     showDataPage: {
       subDataRelicHeader: {
-        label1: 'Category',
-        label2: 'Descriptions',
+        label1: 'Kategori',
+        label2: 'Deskripsi',
+        label3: 'Asal',
       },
     },
     button: {
       buttonSave: {
-        label: 'Save',
+        label: 'Simpan',
       },
     },
     dropDown: {
-      placeholder: 'Select ',
-      searchPlaceholder: 'Search... ',
+      placeholder: 'Pilih ',
+      searchPlaceholder: 'Cari... ',
     },
     popupMenu: {
-      label: 'Change Server',
-      value: 'Change Server',
+      label: 'Ubah Server',
+      value: 'Ubah Server',
     },
-    example: 'For example : ',
-    success: 'Your request succeed!',
+    example:
+      'Contoh : http://192.168.1.1, https://192.168.1.1, https://google.com',
+    success: 'Permintaan anda berhasil diproses!',
   },
 };
 
 // Reducer
 const rootReducer = (state = globalState, action) => {
   let value = action.option;
-  if (action.type === ActionType.CHANGE_LANGUAGE && value === 'indonesian') {
-    globalState.languages = {
-      language: 'indonesian',
-      formVisitors: {
-        titleHeaderPage: 'Daftar',
-        name: 'Nama',
-        nationality: 'Asal Negara',
-        states_provinces: 'Propinsi',
-        cities_regions: 'Kota/Kabupaten',
-        address: 'Alamat',
-        gender: 'Jenis Kelamin',
-        jobs: 'Pekerjaan',
-        school_college: 'Nama Sekolah/Perguruan Tinggi',
-        phone_number: 'Nomor HP',
-      },
-      formRecommendations: {
-        titleHeaderPage: 'Saran',
-        name: 'Nama',
-        email: 'Alamat Email',
-        phone: 'Nomor HP',
-        recommendations: 'Saran',
-      },
-      tabNavigationMenu: {
-        home: 'Beranda',
-        scanner: 'Pemindai',
-        register: 'Daftar',
-        recommendations: 'Saran',
-      },
-      headerScannerPage: {
-        title: 'Pindai QR Code',
-      },
-      headerChangeURLPage: {
-        title: 'Ubah URL Server',
-      },
-      homePage: {
-        cardTitle: {
-          events: 'Kegiatan',
-          articles: 'Artikel',
-        },
-      },
-      showDataPage: {
-        subDataRelicHeader: {
-          label1: 'Kategori',
-          label2: 'Deskripsi',
-        },
-      },
-      button: {
-        buttonSave: {
-          label: 'Simpan',
-        },
-      },
-      dropDown: {
-        placeholder: 'Pilih ',
-        searchPlaceholder: 'Cari... ',
-      },
-      popupMenu: {
-        label: 'Ubah Server',
-        value: 'Ubah Server',
-      },
-      example: 'Contoh : ',
-      success: 'Permintaan anda berhasil diproses!',
-    };
-  } else {
+  if (action.type === ActionType.CHANGE_LANGUAGE && value === 'english') {
     globalState.languages = {
       language: 'english',
       formVisitors: {
@@ -174,6 +114,7 @@ const rootReducer = (state = globalState, action) => {
         subDataRelicHeader: {
           label1: 'Category',
           label2: 'Descriptions',
+          label3: 'From',
         },
       },
       button: {
@@ -189,13 +130,78 @@ const rootReducer = (state = globalState, action) => {
         label: 'Change Server',
         value: 'Change Server',
       },
-      example: 'For example : ',
+      example:
+        'For example : http://192.168.1.1, https://192.168.1.1, https://google.com',
       success: 'Your request succeed!',
+    };
+  } else {
+    globalState.languages = {
+      language: 'indonesian',
+      formVisitors: {
+        titleHeaderPage: 'Daftar',
+        name: 'Nama',
+        nationality: 'Asal Negara',
+        states_provinces: 'Propinsi',
+        cities_regions: 'Kota/Kabupaten',
+        address: 'Alamat',
+        gender: 'Jenis Kelamin',
+        jobs: 'Pekerjaan',
+        school_college: 'Nama Sekolah/Perguruan Tinggi',
+        phone_number: 'Nomor HP',
+      },
+      formRecommendations: {
+        titleHeaderPage: 'Saran',
+        name: 'Nama',
+        email: 'Alamat Email',
+        phone: 'Nomor HP',
+        recommendations: 'Saran',
+      },
+      tabNavigationMenu: {
+        home: 'Beranda',
+        scanner: 'Pemindai',
+        register: 'Daftar',
+        recommendations: 'Saran',
+      },
+      headerScannerPage: {
+        title: 'Pindai QR Code',
+      },
+      headerChangeURLPage: {
+        title: 'Ubah URL Server',
+      },
+      homePage: {
+        cardTitle: {
+          events: 'Kegiatan',
+          articles: 'Artikel',
+        },
+      },
+      showDataPage: {
+        subDataRelicHeader: {
+          label1: 'Kategori',
+          label2: 'Deskripsi',
+          label3: 'Asal',
+        },
+      },
+      button: {
+        buttonSave: {
+          label: 'Simpan',
+        },
+      },
+      dropDown: {
+        placeholder: 'Pilih ',
+        searchPlaceholder: 'Cari... ',
+      },
+      popupMenu: {
+        label: 'Ubah Server',
+        value: 'Ubah Server',
+      },
+      example:
+        'Contoh : http://192.168.1.1, https://192.168.1.1, https://google.com',
+      success: 'Permintaan anda berhasil diproses!',
     };
   }
 
   if (action.type === ActionType.CHANGE_SERVER) {
-    globalState.url = `http://${value}`;
+    globalState.url = value;
   }
 
   return state;
