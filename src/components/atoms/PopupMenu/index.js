@@ -32,7 +32,10 @@ export const PopupMenu = ({label, options, onSelect}) => {
       <MenuTrigger onPress={() => onTriggerPress()}>{label}</MenuTrigger>
       <MenuOptions style={styles.menuOptions}>
         {options.map(data => (
-          <MenuOption style={styles.menuOption} value={data.value}>
+          <MenuOption
+            style={styles.menuOption}
+            value={data.value}
+            key={data.value}>
             <Text style={styles.textLabel}>{data.label}</Text>
           </MenuOption>
         ))}

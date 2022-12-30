@@ -5,7 +5,7 @@ const mainColors = {
   dark4: '#bdbbbb',
   white1: '#F5E8E4',
   white2: '#F5E8E4',
-  white3: '',
+  white3: '#262626',
   border1: '#F5E8E4',
   border2: '#F5C7A9',
   primary1: '#0B5ED8',
@@ -17,6 +17,8 @@ export const colors = {
   primaryOne: mainColors.primary1,
   dark: mainColors.dark1,
   midDark: mainColors.dark4,
+  light: mainColors.white1,
+  middleLight: mainColors.white3,
   secondary: mainColors.dark2,
   page: {
     background: mainColors.white2,

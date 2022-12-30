@@ -32,7 +32,6 @@ export default function ScannerScreen({navigation, route}) {
     // Called after te successful scanning of QRCode/Barcode
     setQrvalue(qrvalue);
     navigation.navigate('ShowDataScreen', {
-      screen: 'ScannerScreen',
       koleksi_id: qrvalue,
     });
     // setOpneScanner(false);

@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
 import {ScrollView} from 'react-native-gesture-handler';
-import {Button, Gap, Input, Loading, Textarea} from '../../components';
+import {Button, Gap, Header, Input, Loading, Textarea} from '../../components';
 import {postData} from '../../helpers/CRUD';
 import {colors, useForm} from '../../utils';
 //redux toolkit
@@ -88,6 +88,7 @@ function SaranScreen() {
     <View style={styles.container}>
       <View style={styles.page(tabBarHeight)}>
         <ScrollView showsVerticalScrollIndicator={false}>
+          <Header title={languages.formRecommendations.titleHeaderPage} />
           <Input
             label={languages.formRecommendations.name}
             value={form.nama}

@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import MiIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 

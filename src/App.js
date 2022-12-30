@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import TabNavigator from './TabNavigator';
-import {Splash} from './pages';
+import React, {useEffect, useState} from 'react';
 import FlashMessage from 'react-native-flash-message';
 import {MenuProvider} from 'react-native-popup-menu';
-import {Loading} from './components';
+import {Splash} from './pages';
+import TabNavigatorStackScreen from './router/index';
 //redux toolkit
 import {Provider} from 'react-redux';
 import {store} from './utils/store/index';
@@ -14,7 +13,7 @@ export default function App() {
 
   useEffect(() => {
     setTimeout(() => {
-      setView(<TabNavigator />);
+      setView(<TabNavigatorStackScreen />);
     }, 3000);
   }, []);
 

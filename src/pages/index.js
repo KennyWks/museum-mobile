@@ -5,6 +5,7 @@ import SaranScreen from './SaranScreen';
 import ScannerScreen from './ScannerScreen';
 import ShowDataScreen from './ShowDataScreen';
 import Splash from './Splash';
+import TabNavigator from './TabNavigator';
 
 export {
   Splash,
@@ -14,4 +15,5 @@ export {
   RegisterScreen,
   SaranScreen,
   ChangeURLScreen,
+  TabNavigator,
 };

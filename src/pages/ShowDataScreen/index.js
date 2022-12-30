@@ -1,12 +1,12 @@
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {showMessage} from 'react-native-flash-message';
 import {ScrollView} from 'react-native-gesture-handler';
 import {ImageSlider} from 'react-native-image-slider-banner';
 import {DataRelic, Loading} from '../../components';
 import {getData} from '../../helpers/CRUD';
 import {colors} from '../../utils';
-import {showMessage} from 'react-native-flash-message';
 //redux toolkit
 import {connect, useSelector} from 'react-redux';
 

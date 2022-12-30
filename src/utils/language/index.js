@@ -1,5 +1,6 @@
 export const indonesian = {
   language: 'indonesian',
+  locale: 'id',
   formVisitors: {
     titleHeaderPage: 'Daftar',
     name: 'Nama',
@@ -61,10 +62,12 @@ export const indonesian = {
     'Contoh : http://192.168.1.1, https://192.168.1.1, https://google.com',
   success: 'Permintaan anda berhasil diproses!',
   loading: 'Memuat...',
+  published_at: 'Diposting ',
 };
 
 export const english = {
   language: 'english',
+  locale: 'en',
   formVisitors: {
     titleHeaderPage: 'Register',
     name: 'Name',
@@ -126,4 +129,5 @@ export const english = {
     'For example : http://192.168.1.1, https://192.168.1.1, https://google.com',
   success: 'Your request succeed!',
   loading: 'Loading...',
+  published_at: 'Published at ',
 };

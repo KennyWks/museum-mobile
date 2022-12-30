@@ -1,5 +1,5 @@
+import {english, indonesian} from '../../utils';
 import ActionType from './globalActionType';
-import {indonesian, english} from '../../utils';
 
 let globalState = {
   url: 'http://192.168.72.60:8083',

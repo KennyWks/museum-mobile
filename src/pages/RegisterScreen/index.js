@@ -8,6 +8,7 @@ import {
   Dropdown,
   DropdownWithSearch,
   Gap,
+  Header,
   Input,
   Loading,
   Textarea,
@@ -217,6 +218,7 @@ function RegisterScreen() {
     <View style={styles.container}>
       <View style={styles.page(tabBarHeight)}>
         <ScrollView showsVerticalScrollIndicator={false}>
+          <Header title={languages.formVisitors.titleHeaderPage} />
           <Input
             label={languages.formVisitors.name}
             value={form.nama_pengunjung}
